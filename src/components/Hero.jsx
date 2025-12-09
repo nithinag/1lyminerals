@@ -4,9 +4,6 @@ const Hero = () => {
   return (
     <section className="hero" id="home">
       <div className="hero-background">
-        <div className="water-ripple"></div>
-        <div className="water-ripple ripple-2"></div>
-        <div className="water-ripple ripple-3"></div>
       </div>
       
       <div className="container">
@@ -63,7 +60,6 @@ const Hero = () => {
                   <div className="water-level"></div>
                 </div>
               </div>
-              <div className="bottle-glow"></div>
             </div>
           </div>
         </div>

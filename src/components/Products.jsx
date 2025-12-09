@@ -52,7 +52,6 @@ const Products = () => {
                     <div className="water-level-large"></div>
                   </div>
                 </div>
-                <div className="product-glow"></div>
               </div>
             </div>
 
