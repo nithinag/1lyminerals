@@ -50,16 +50,11 @@ const Hero = () => {
           
           <div className="hero-image">
             <div className="bottle-container">
-              <div className="bottle">
-                <div className="bottle-cap"></div>
-                <div className="bottle-body">
-                  <div className="bottle-label">
-                    <div className="label-logo">1LY</div>
-                    <div className="label-text">MINERALS</div>
-                  </div>
-                  <div className="water-level"></div>
-                </div>
-              </div>
+              <img 
+                src="/group-bottles-1.png" 
+                alt="1LY Minerals Bottles" 
+                className="bottle-image"
+              />
             </div>
           </div>
         </div>

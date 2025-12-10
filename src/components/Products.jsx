@@ -41,17 +41,11 @@ const Products = () => {
           <div className="product-showcase">
             <div className="product-image-wrapper">
               <div className="product-bottle">
-                <div className="bottle-large">
-                  <div className="bottle-cap-large"></div>
-                  <div className="bottle-body-large">
-                    <div className="bottle-label-large">
-                      <div className="label-logo-large">1LY</div>
-                      <div className="label-text-large">MINERALS</div>
-                      <div className="label-subtitle">Premium Water</div>
-                    </div>
-                    <div className="water-level-large"></div>
-                  </div>
-                </div>
+                <img 
+                  src="/group-bottles-1.png" 
+                  alt="1LY Minerals Bottles" 
+                  className="bottle-image-large"
+                />
               </div>
             </div>
 

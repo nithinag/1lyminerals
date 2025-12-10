@@ -128,26 +128,80 @@
 
 .bottle-container {
   position: relative;
-  width: 300px;
-  height: 500px;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
-.bottle {
+/* Parallax effect on scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .bottle-container {
+    transition: transform 0.1s ease-out;
+  }
+}
+
+.bottle-image {
   position: relative;
-  width: 200px;
-  height: 450px;
-  animation: float 3s ease-in-out infinite;
+  width: 100%;
+  height: auto;
+  max-width: 900px;
+  object-fit: contain;
+  animation: floatEnhanced 4s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(230, 51, 38, 0.25));
+  transition: transform 0.3s ease, filter 0.3s ease;
+  will-change: transform;
 }
 
-@keyframes float {
+.bottle-image:hover {
+  transform: scale(1.05) rotateY(5deg);
+  filter: drop-shadow(0 25px 50px rgba(230, 51, 38, 0.35));
+  animation-play-state: paused;
+}
+
+@keyframes floatEnhanced {
   0%, 100% {
-    transform: translateY(0);
+    transform: translateY(0) translateX(0) rotateZ(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(5px) rotateZ(1deg);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-25px) translateX(0) rotateZ(0deg);
+  }
+  75% {
+    transform: translateY(-15px) translateX(-5px) rotateZ(-1deg);
+  }
+}
+
+/* Glow effect */
+.bottle-image::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(230, 51, 38, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulseGlow 3s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
   }
 }
 
@@ -288,13 +342,11 @@
   }
 
   .bottle-container {
-    width: 250px;
-    height: 400px;
+    max-width: 600px;
   }
 
-  .bottle {
-    width: 150px;
-    height: 350px;
+  .bottle-image {
+    max-width: 600px;
   }
   
   .stat {
@@ -336,13 +388,11 @@
   }
 
   .bottle-container {
-    width: 200px;
-    height: 320px;
+    max-width: 500px;
   }
 
-  .bottle {
-    width: 120px;
-    height: 280px;
+  .bottle-image {
+    max-width: 500px;
   }
   
   .hero-buttons {

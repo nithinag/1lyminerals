@@ -20,19 +20,101 @@
 .product-bottle {
   position: relative;
   width: 100%;
-  max-width: 400px;
-  height: 500px;
+  max-width: 500px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
-.bottle-large {
+/* Water shimmer effect overlay */
+.product-bottle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+.bottle-image-large {
   position: relative;
-  width: 250px;
-  height: 500px;
-  animation: float 3s ease-in-out infinite;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  object-fit: contain;
+  animation: floatEnhancedLarge 4.5s ease-in-out infinite;
   filter: drop-shadow(0 20px 40px rgba(230, 51, 38, 0.25));
+  transition: transform 0.3s ease, filter 0.3s ease;
+  will-change: transform;
+}
+
+.bottle-image-large:hover {
+  transform: scale(1.08) rotateY(-5deg);
+  filter: drop-shadow(0 25px 50px rgba(230, 51, 38, 0.35));
+  animation-play-state: paused;
+}
+
+@keyframes floatEnhancedLarge {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotateZ(0deg);
+  }
+  25% {
+    transform: translateY(-18px) translateX(-4px) rotateZ(-1deg);
+  }
+  50% {
+    transform: translateY(-28px) translateX(0) rotateZ(0deg);
+  }
+  75% {
+    transform: translateY(-18px) translateX(4px) rotateZ(1deg);
+  }
+}
+
+/* Glow effect for products section */
+.bottle-image-large::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130%;
+  height: 130%;
+  background: radial-gradient(circle, rgba(230, 51, 38, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulseGlowLarge 3.5s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes pulseGlowLarge {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
 }
 
 .bottle-cap-large {
@@ -314,9 +396,12 @@
 }
 
 @media (max-width: 480px) {
-  .bottle-large {
-    width: 180px;
-    height: 380px;
+  .bottle-image-large {
+    max-width: 300px;
+  }
+  
+  .product-bottle {
+    max-width: 300px;
   }
 
   .product-details h3 {
