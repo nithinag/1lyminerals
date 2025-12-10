@@ -47,7 +47,7 @@ const About = () => {
               <div className="feature-item">
                 <div className="feature-icon">✓</div>
                 <div className="feature-content">
-                  <h4>FSSAI & BIS Certified</h4>
+                  <h4>FSSAI Certified</h4>
                   <p>Fully compliant with national safety standards</p>
                 </div>
               </div>

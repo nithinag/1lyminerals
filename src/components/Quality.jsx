@@ -28,19 +28,6 @@ const Quality = () => {
     }
   ];
 
-  const certifications = [
-    {
-      name: 'FSSAI',
-      description: 'Food Safety and Standards Authority of India',
-      icon: '✓'
-    },
-    {
-      name: 'BIS',
-      description: 'Bureau of Indian Standards',
-      icon: '✓'
-    }
-  ];
-
   return (
     <section className="quality section" id="quality">
       <div className="container">
@@ -68,25 +55,6 @@ const Quality = () => {
                   {index < qualitySteps.length - 1 && (
                     <div className="step-connector"></div>
                   )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Certifications */}
-          <div className="certifications-section">
-            <h3 className="text-center">Certified Trust</h3>
-            <p className="certifications-intro text-center">
-              Fully compliant with national safety and quality standards
-            </p>
-            <div className="certifications-grid">
-              {certifications.map((cert, index) => (
-                <div key={index} className="certification-card">
-                  <div className="cert-badge">
-                    <div className="cert-icon">{cert.icon}</div>
-                  </div>
-                  <h4>{cert.name}</h4>
-                  <p>{cert.description}</p>
                 </div>
               ))}
             </div>

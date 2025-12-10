@@ -75,7 +75,7 @@ const Footer = () => {
               </p>
               <div className="footer-badges">
                 <span className="badge">✓ FSSAI Certified</span>
-                <span className="badge">✓ BIS Approved</span>
+              
                 <span className="badge">♻️ Eco-Friendly</span>
               </div>
             </div>

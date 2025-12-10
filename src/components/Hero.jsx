@@ -35,10 +35,10 @@ const Hero = () => {
                 </div>
               </div>
               <div className="stat">
-                <div className="stat-icon">⚡</div>
+                <div className="stat-icon">🤝</div>
                 <div className="stat-text">
-                  <div className="stat-number">3+</div>
-                  <div className="stat-label">Minerals</div>
+                  <div className="stat-number">Trusted</div>
+                  <div className="stat-label">by Millions</div>
                 </div>
               </div>
             </div>

@@ -21,12 +21,12 @@
   font-weight: 400;
 
   /* Spacing */
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 3rem;
-  --spacing-xl: 4rem;
-  --spacing-xxl: 6rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.5rem;
+  --spacing-xxl: 3rem;
 
   /* Border Radius */
   --radius-sm: 4px;
@@ -97,8 +97,8 @@ h4 {
 }
 
 p {
-  font-size: 1.125rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.6;
   margin-bottom: var(--spacing-sm);
   color: var(--neutral-gray);
 }
@@ -126,7 +126,7 @@ a {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-red), var(--accent-orange));
+  background: var(--primary-red);
   color: var(--neutral-white);
   box-shadow: var(--shadow-md);
 }
@@ -134,7 +134,7 @@ a {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  background: linear-gradient(135deg, var(--primary-red-dark), var(--primary-red));
+  background: var(--primary-red-dark);
 }
 
 .btn-secondary {
@@ -156,7 +156,7 @@ a {
 }
 
 .section {
-  padding: var(--spacing-xxl) 0;
+  padding: var(--spacing-xl) 0;
 }
 
 /* Utility Classes */
@@ -165,10 +165,7 @@ a {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--primary-red), var(--accent-orange));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-red);
 }
 
 .fade-in {

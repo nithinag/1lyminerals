@@ -75,7 +75,7 @@ const Products = () => {
               <div className="product-features">
                 <div className="feature-badge">
                   <span className="badge-icon">✓</span>
-                  <span>BIS Certified</span>
+                  <span>Trusted by Millions</span>
                 </div>
                 <div className="feature-badge">
                   <span className="badge-icon">✓</span>

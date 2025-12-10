@@ -69,7 +69,7 @@ const Contact = () => {
               <h4>Why Choose 1LY MINERALS?</h4>
               <ul>
                 <li>✓ Premium mineral-enriched water</li>
-                <li>✓ FSSAI & BIS certified</li>
+                <li>✓ FSSAI certified</li>
                 <li>✓ Multi-stage purification</li>
                 <li>✓ Pan-India distribution</li>
                 <li>✓ Trusted by millions</li>

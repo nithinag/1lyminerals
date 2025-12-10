@@ -29,7 +29,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
+  background: var(--primary-red);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -41,14 +41,14 @@
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.15em;
-  color: var(--accent-orange-light);
+  color: var(--primary-red-light);
   margin-top: -4px;
 }
 
 .footer-tagline {
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--accent-orange-light);
+  color: var(--primary-red-light);
   margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
 }
@@ -88,7 +88,7 @@
 }
 
 .footer-links a:hover {
-  color: var(--accent-orange-light);
+  color: var(--primary-red-light);
   padding-left: 5px;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .footer-contact a:hover {
-  color: var(--accent-orange-light);
+  color: var(--primary-red-light);
 }
 
 /* Footer Bottom */
@@ -170,7 +170,7 @@
   right: 2rem;
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--primary-red), var(--accent-orange));
+  background: var(--primary-red);
   color: var(--neutral-white);
   border: none;
   border-radius: 50%;
