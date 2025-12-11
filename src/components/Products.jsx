@@ -1,27 +1,27 @@
 import './Products.css';
 
 const Products = () => {
-  const minerals = [
+  const packagingOptions = [
     {
-      name: 'Calcium',
-      amount: '2.0mg',
-      icon: '🦴',
-      benefit: 'Strengthens bones and teeth',
-      color: '#0066CC'
+      size: '200ml',
+      caseQuantity: '15 Bottles Per Case',
+      icon: '💧',
+      color: '#0066CC',
+      offer: '🔥 Special Offer'
     },
     {
-      name: 'Magnesium',
-      amount: '0.2mg',
-      icon: '⚡',
-      benefit: 'Supports muscle function',
-      color: '#00B4D8'
+      size: '500ml',
+      caseQuantity: '15 Bottles Per Case',
+      icon: '💧',
+      color: '#00B4D8',
+      offer: '🎁 Best Seller'
     },
     {
-      name: 'Potassium',
-      amount: '0.1mg',
-      icon: '❤️',
-      benefit: 'Maintains heart health',
-      color: '#90E0EF'
+      size: '1 Liter',
+      caseQuantity: '15 Bottles Per Case',
+      icon: '💧',
+      color: '#90E0EF',
+      offer: '⭐ Popular'
     }
   ];
 
@@ -58,15 +58,18 @@ const Products = () => {
               </p>
 
               <div className="minerals-list">
-                {minerals.map((mineral, index) => (
-                  <div key={index} className="mineral-card" style={{'--mineral-color': mineral.color}}>
-                    <div className="mineral-icon">{mineral.icon}</div>
+                {packagingOptions.map((option, index) => (
+                  <div key={index} className="mineral-card" style={{'--mineral-color': option.color}}>
+                    <div className="mineral-icon">{option.icon}</div>
                     <div className="mineral-info">
                       <div className="mineral-header">
-                        <span className="mineral-name">{mineral.name}</span>
-                        <span className="mineral-amount">{mineral.amount}</span>
+                        <span className="mineral-name">{option.size}</span>
+                        <span className="card-offer-badge">{option.offer}</span>
                       </div>
-                      <p className="mineral-benefit">{mineral.benefit}</p>
+                      <p className="mineral-benefit">{option.caseQuantity}</p>
+                      <div className="card-cta-buttons">
+                        <a href="tel:+917090009669" className="card-call-btn">📞 Call</a>
+                      </div>
                     </div>
                   </div>
                 ))}

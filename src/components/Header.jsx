@@ -26,9 +26,12 @@ const Header = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <nav className="navbar">
-          <div className="logo">
-            <span className="logo-text">1LY</span>
-            <span className="logo-sub">MINERALS</span>
+          <div className="logo" onClick={() => scrollToSection('home')}>
+            <img src="/logo.svg" alt="1LY MINERALS Logo" className="logo-image" />
+            <div className="logo-text-wrapper">
+              <span className="logo-text">1LY</span>
+              <span className="logo-sub">MINERALS</span>
+            </div>
           </div>
 
           <button 
@@ -43,7 +46,7 @@ const Header = () => {
 
           <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
             <li><a onClick={() => scrollToSection('home')}>Home</a></li>
-            <li><a onClick={() => scrollToSection('about')}>About</a></li>
+            <li><a onClick={() => scrollToSection('main-content')}>About</a></li>
             <li><a onClick={() => scrollToSection('products')}>Products</a></li>
             <li><a onClick={() => scrollToSection('quality')}>Quality</a></li>
             <li><a onClick={() => scrollToSection('contact')}>Contact</a></li>

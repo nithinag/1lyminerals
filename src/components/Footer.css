@@ -20,9 +20,21 @@
 /* Brand Section */
 .footer-logo {
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-logo-image {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-logo-text-wrapper {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 1rem;
 }
 
 .footer-logo .logo-text {
@@ -252,6 +264,10 @@
     font-size: 1.25rem;
   }
   
+  .footer-logo-image {
+    height: 45px;
+  }
+
   .footer-logo .logo-text {
     font-size: 2rem;
   }

@@ -251,6 +251,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.mineral-amount-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.125rem;
+}
+
 .mineral-amount {
   font-size: 1rem;
   font-weight: 700;
@@ -264,12 +271,63 @@
   font-size: 0.9375rem;
   color: var(--neutral-gray);
   margin: 0;
+  margin-bottom: 0.75rem;
+}
+
+.card-offer-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-red);
+  background: rgba(230, 51, 38, 0.1);
+  padding: 0.25rem 0.625rem;
+  border-radius: 12px;
+  white-space: nowrap;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.card-cta-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: flex-start;
+}
+
+.card-call-btn {
+  padding: 0.5rem 1rem;
+  background: var(--neutral-white);
+  color: var(--primary-red);
+  border: 2px solid var(--primary-red);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.card-call-btn:hover {
+  background: var(--primary-red);
+  color: var(--neutral-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 51, 38, 0.3);
 }
 
 .product-features {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 .feature-badge {
@@ -283,6 +341,156 @@
   font-weight: 600;
   font-size: 0.9375rem;
   box-shadow: var(--shadow-md);
+}
+
+/* Call to Action Chips Section */
+.cta-chips-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.sale-chip {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #FF6B6B 0%, #E63326 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 15px rgba(230, 51, 38, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.sale-icon {
+  font-size: 2rem;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.sale-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sale-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sale-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--neutral-white);
+}
+
+.cta-buttons-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  border: 2px solid transparent;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-primary {
+  background: var(--primary-red);
+  color: var(--neutral-white);
+}
+
+.cta-primary:hover {
+  background: var(--primary-red-dark);
+  border-color: var(--primary-red-dark);
+}
+
+.cta-secondary {
+  background: var(--neutral-white);
+  color: var(--primary-red);
+  border: 2px solid var(--primary-red);
+}
+
+.cta-secondary:hover {
+  background: var(--primary-red);
+  color: var(--neutral-white);
+}
+
+.cta-icon {
+  font-size: 1.25rem;
+}
+
+.offer-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #FFE5B4 0%, #FFD700 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.offer-badge {
+  font-size: 1.5rem;
+  animation: rotate 3s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+.offer-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #8B6914;
+  flex: 1;
 }
 
 .badge-icon {
@@ -383,6 +591,14 @@
   .minerals-list {
     gap: 0.875rem;
   }
+
+  .cta-buttons-group {
+    flex-direction: column;
+  }
+
+  .cta-button {
+    width: 100%;
+  }
 }
 
 @media (max-width: 640px) {
@@ -429,6 +645,10 @@
     align-items: center;
   }
 
+  .card-cta-buttons {
+    justify-content: center;
+  }
+
   .product-cta {
     padding: 2rem 1.5rem;
   }
@@ -448,6 +668,36 @@
   
   .product-features {
     justify-content: center;
+  }
+
+  .cta-chips-section {
+    margin-top: 1.5rem;
+    gap: 1rem;
+  }
+
+  .sale-chip {
+    padding: 1rem;
+  }
+
+  .sale-icon {
+    font-size: 1.5rem;
+  }
+
+  .sale-text {
+    font-size: 0.9375rem;
+  }
+
+  .cta-button {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .offer-chip {
+    padding: 0.875rem 1rem;
+  }
+
+  .offer-text {
+    font-size: 0.875rem;
   }
 }
 

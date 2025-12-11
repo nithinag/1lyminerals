@@ -60,32 +60,6 @@ const Quality = () => {
             </div>
           </div>
 
-          {/* Quality Commitment */}
-          <div className="quality-commitment">
-            <div className="commitment-grid">
-              <div className="commitment-item">
-                <div className="commitment-icon">🎯</div>
-                <h4>100% Safe</h4>
-                <p>Every drop tested for safety and purity</p>
-              </div>
-              <div className="commitment-item">
-                <div className="commitment-icon">🏭</div>
-                <h4>Modern Facility</h4>
-                <p>State-of-the-art manufacturing plants</p>
-              </div>
-              <div className="commitment-item">
-                <div className="commitment-icon">🔍</div>
-                <h4>Rigorous Testing</h4>
-                <p>Multiple quality checkpoints</p>
-              </div>
-              <div className="commitment-item">
-                <div className="commitment-icon">🌱</div>
-                <h4>Eco-Responsible</h4>
-                <p>Sustainable and environmentally conscious</p>
-              </div>
-            </div>
-          </div>
-
           {/* Environmental Message */}
           <div className="environmental-message">
             <div className="env-icon">♻️</div>

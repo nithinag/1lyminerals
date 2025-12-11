@@ -2,10 +2,10 @@ import './About.css';
 
 const About = () => {
   return (
-    <section className="about section" id="about">
+    <section className="about section" id="main-content">
       <div className="container">
         <div className="section-header text-center">
-          <span className="section-tag">Who We Are</span>
+          <span className="section-tag">We Are</span>
           <h2>The Tradition of Trust</h2>
           <p className="section-subtitle">
             Delivering safe, healthy, and mineral-enriched water to millions of Indian families
@@ -22,7 +22,7 @@ const About = () => {
               </div>
             </div>
 
-            <h3>Premium Packaged Drinking Water from Bangalore</h3>
+            <h3>Premium Packaged Drinking Water</h3>
             <p>
               <strong>1LY MINERALS</strong> is a premium packaged drinking water brand headquartered 
               in Bangalore, dedicated to delivering safe, healthy, and mineral-enriched water. 

@@ -11,15 +11,18 @@ const Footer = () => {
             {/* Brand Section */}
             <div className="footer-col">
               <div className="footer-logo">
-                <span className="logo-text">1LY</span>
-                <span className="logo-sub">MINERALS</span>
+                <img src="/logo.svg" alt="1LY MINERALS Logo" className="footer-logo-image" />
+                <div className="footer-logo-text-wrapper">
+                  <span className="logo-text">1LY</span>
+                  <span className="logo-sub">MINERALS</span>
+                </div>
               </div>
               <p className="footer-tagline">
                 The Tradition of Trust
               </p>
               <p className="footer-description">
-                Premium packaged drinking water enriched with essential minerals. 
-                Industry leader in reliability, serving millions across India.
+              Premium packaged drinking water enriched with essential minerals.
+              Industry leader in reliability, serving millions across India.
               </p>
             </div>
 
@@ -28,7 +31,7 @@ const Footer = () => {
               <h4>Quick Links</h4>
               <ul className="footer-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
+                <li><a href="#main-content">About Us</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#quality">Quality Standards</a></li>
                 <li><a href="#contact">Contact Us</a></li>
@@ -42,7 +45,6 @@ const Footer = () => {
                 <li>Mineral Enriched Water</li>
                 <li>Premium Packaged Water</li>
                 <li>FSSAI Certified</li>
-                <li>BIS Approved</li>
               </ul>
             </div>
 
@@ -52,7 +54,7 @@ const Footer = () => {
               <ul className="footer-contact">
                 <li>
                   <span className="contact-icon">📍</span>
-                  <span>Avalahall, Bangalore - 560 049</span>
+                  <span>Avalahalli, Bangalore - 560 049</span>
                 </li>
                 <li>
                   <span className="contact-icon">📞</span>
