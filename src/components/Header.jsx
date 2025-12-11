@@ -29,8 +29,8 @@ const Header = () => {
           <div className="logo" onClick={() => scrollToSection('home')}>
             <img src="/logo.svg" alt="1LY MINERALS Logo" className="logo-image" />
             <div className="logo-text-wrapper">
-              <span className="logo-text">1LY</span>
-              <span className="logo-sub">MINERALS</span>
+            <span className="logo-text">1LY</span>
+            <span className="logo-sub">MINERALS</span>
             </div>
           </div>
 

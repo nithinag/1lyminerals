@@ -4,20 +4,20 @@ const Products = () => {
   const packagingOptions = [
     {
       size: '200ml',
-      caseQuantity: '15 Bottles Per Case',
+      caseQuantity: '48 Bottles Per Case',
       icon: '💧',
       color: '#0066CC',
       offer: '🔥 Special Offer'
     },
     {
       size: '500ml',
-      caseQuantity: '15 Bottles Per Case',
+      caseQuantity: '24 Bottles Per Case',
       icon: '💧',
       color: '#00B4D8',
       offer: '🎁 Best Seller'
     },
     {
-      size: '1 Liter',
+      size: '1 Litre  ',
       caseQuantity: '15 Bottles Per Case',
       icon: '💧',
       color: '#90E0EF',

@@ -8,12 +8,13 @@ const OrderBot = () => {
   const [conversationState, setConversationState] = useState('initial');
   const [language, setLanguage] = useState('');
   const [orderData, setOrderData] = useState({
+    intent: '', // 'order', 'inquiry', 'delivery'
     name: '',
     mobile: '',
     email: '',
     city: '',
     pincode: '',
-    serviceType: '',
+    customerType: '',
     requirements: ''
   });
   
@@ -23,74 +24,74 @@ const OrderBot = () => {
   // Content in three languages
   const content = {
     en: {
-      initial: "Hello! How can I help you today?",
-      name: "Hello, I am sam from 1ly Minerals. Could you please share your full name?",
-      languageSelect: "Thank you, {name}! Please select your preferred language:\n\n1. English\n2. Kannada\n3. Hindi",
-      mobile: "May I have your mobile number for direct contact?",
-      email: "Please provide your email address. (You can type 'skip' if you don't have one)",
-      city: "Could you please share your city or town name?",
-      pincode: "Please provide your PIN code.",
-      serviceType: "What type of service are you looking for?\n\n1. Retail Order\n2. Business/Distributor Inquiry\n3. Co-packing\n4. General Information",
-      requirements: "Please share your specific order or inquiry details:\n\n• Product size (e.g., 200ml, 500ml, 1 Liter, 2 Liters)\n• Quantity (boxes/bottles)\n• Purpose of the order",
-      completion: "We have all the necessary information! Our 1ly Minerals team will review your details and requirements and contact you shortly via phone or email. Thank you for choosing 1ly Minerals!",
+      initial: "Hello! I'm Sam from 1ly Minerals. How can I assist you today? Please choose an option:\n\n1. Place a New Order\n2. General Inquiry / Contact\n3. Check Delivery Status",
+      languageSelect: "Thank you! Before we proceed, what language would you prefer? Please choose an option:\n\n1. English\n2. Kannada\n3. Hindi",
+      mobile: "Great! Please share your mobile number so we can contact you regarding your request.",
+      email: "Thank you. May I also have your email address? (You can type 'skip' if you don't have one or prefer not to share)",
+      name: "And finally, please share your full name.",
+      city: "To check service availability, please share your city/town name.",
+      pincode: "And finally, for accurate mapping, please provide your PIN code.",
+      customerType: "What type of customer are you? (e.g., Retailer, Distributor, End Customer).",
+      requirements: "Please share your specific order requirements: product size (e.g., 200ml, 1 Liter), quantity (boxes/bottles), and the purpose.",
+      completion: "Thank you! We have all the details. Our 1ly Minerals team will review your request and contact you shortly via phone or email. Thank you for choosing 1ly Minerals!",
       invalidMobile: "Please enter a valid 10-digit mobile number.",
-      invalidEmail: "Please enter a valid email address or type 'skip'.",
+      invalidEmail: "Please enter a valid email address.",
       invalidPincode: "Please enter a valid 6-digit PIN code.",
-      selectOption: "Please select a valid option.",
+      selectOption: "Please select a valid option (1, 2, or 3).",
       placeholder: "Type your message...",
       send: "Send"
     },
     kn: {
-      initial: "ನಮಸ್ಕಾರ! ನಾನು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
-      name: "ನಮಸ್ಕಾರ, ನಾನು 1ly Minerals ನಿಂದ ಸ್ಯಾಮ್. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ಹಂಚಿಕೊಳ್ಳಿ?",
-      languageSelect: "ಧನ್ಯವಾದಗಳು, {name}! ದಯವಿಟ್ಟು ನಿಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:\n\n1. English\n2. Kannada\n3. Hindi",
-      mobile: "ನೇರ ಸಂಪರ್ಕಕ್ಕಾಗಿ ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನೀಡಬಹುದೇ?",
-      email: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನೀಡಿ. (ನೀವು ಒಂದನ್ನು ಹೊಂದಿಲ್ಲದಿದ್ದರೆ 'skip' ಎಂದು ಟೈಪ್ ಮಾಡಬಹುದು)",
-      city: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ನಗರ ಅಥವಾ ಪಟ್ಟಣದ ಹೆಸರನ್ನು ಹಂಚಿಕೊಳ್ಳಿ?",
-      pincode: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪಿನ್ ಕೋಡ್ ನೀಡಿ.",
-      serviceType: "ನೀವು ಯಾವ ರೀತಿಯ ಸೇವೆಯನ್ನು ಹುಡುಕುತ್ತಿದ್ದೀರಿ?\n\n1. ಚಿಲ್ಲರೆ ಆದೇಶ (Retail Order)\n2. ವ್ಯಾಪಾರ/ವಿತರಕ ವಿಚಾರಣೆ (Business/Distributor)\n3. ಸಹ-ಪ್ಯಾಕಿಂಗ್ (Co-packing)\n4. ಸಾಮಾನ್ಯ ಮಾಹಿತಿ (General Information)",
-      requirements: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಆದೇಶ ಅಥವಾ ವಿಚಾರಣೆ ವಿವರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ:\n\n• ಉತ್ಪನ್ನ ಗಾತ್ರ (200ml, 500ml, 1 Liter, 2 Liters)\n• ಪ್ರಮಾಣ (ಪೆಟ್ಟಿಗೆಗಳು/ಬಾಟಲಿಗಳು)\n• ಆದೇಶದ ಉದ್ದೇಶ",
-      completion: "ನಮಗೆ ಎಲ್ಲಾ ಅಗತ್ಯ ಮಾಹಿತಿ ಸಿಕ್ಕಿದೆ! ನಮ್ಮ 1ly Minerals ತಂಡವು ನಿಮ್ಮ ವಿವರಗಳು ಮತ್ತು ಅವಶ್ಯಕತೆಗಳನ್ನು ಪರಿಶೀಲಿಸುತ್ತದೆ ಮತ್ತು ಫೋನ್ ಅಥವಾ ಇಮೇಲ್ ಮೂಲಕ ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ. 1ly Minerals ಅನ್ನು ಆಯ್ಕೆ ಮಾಡಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು!",
+      initial: "ನಮಸ್ಕಾರ! ನಾನು 1ly Minerals ನಿಂದ ಸ್ಯಾಮ್. ನಾನು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು? ದಯವಿಟ್ಟು ಒಂದು ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ:\n\n1. ಹೊಸ ಆದೇಶ ನೀಡಿ\n2. ಸಾಮಾನ್ಯ ವಿಚಾರಣೆ / ಸಂಪರ್ಕ\n3. ವಿತರಣಾ ಸ್ಥಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ",
+      languageSelect: "ಧನ್ಯವಾದಗಳು! ನಾವು ಮುಂದುವರಿಯುವ ಮೊದಲು, ನಿಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆ ಯಾವುದು? ದಯವಿಟ್ಟು ಒಂದು ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ:\n\n1. English\n2. Kannada\n3. Hindi",
+      mobile: "ಉತ್ತಮ! ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಹಂಚಿಕೊಳ್ಳಿ ಇದರಿಂದ ನಾವು ನಿಮ್ಮ ವಿನಂತಿಯ ಬಗ್ಗೆ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಬಹುದು.",
+      email: "ಧನ್ಯವಾದಗಳು. ನಾನು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ಸಹ ಪಡೆಯಬಹುದೇ? (ನೀವು ಒಂದನ್ನು ಹೊಂದಿಲ್ಲದಿದ್ದರೆ ಅಥವಾ ಹಂಚಿಕೊಳ್ಳಲು ಬಯಸದಿದ್ದರೆ 'skip' ಎಂದು ಟೈಪ್ ಮಾಡಬಹುದು)",
+      name: "ಮತ್ತು ಅಂತಿಮವಾಗಿ, ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
+      city: "ಸೇವಾ ಲಭ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಲು, ದಯವಿಟ್ಟು ನಿಮ್ಮ ನಗರ/ಪಟ್ಟಣದ ಹೆಸರನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
+      pincode: "ಮತ್ತು ಅಂತಿಮವಾಗಿ, ನಿಖರವಾದ ಮ್ಯಾಪಿಂಗ್ಗಾಗಿ, ದಯವಿಟ್ಟು ನಿಮ್ಮ PIN ಕೋಡ್ ನೀಡಿ.",
+      customerType: "ನೀವು ಯಾವ ರೀತಿಯ ಗ್ರಾಹಕ? (ಉದಾಹರಣೆಗೆ, ಚಿಲ್ಲರೆ ವ್ಯಾಪಾರಿ, ವಿತರಕ, ಅಂತಿಮ ಗ್ರಾಹಕ).",
+      requirements: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಆದೇಶದ ಅವಶ್ಯಕತೆಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ: ಉತ್ಪನ್ನ ಗಾತ್ರ (ಉದಾಹರಣೆಗೆ, 200ml, 1 Liter), ಪ್ರಮಾಣ (ಪೆಟ್ಟಿಗೆಗಳು/ಬಾಟಲಿಗಳು), ಮತ್ತು ಉದ್ದೇಶ.",
+      completion: "ಧನ್ಯವಾದಗಳು! ನಮಗೆ ಎಲ್ಲಾ ವಿವರಗಳು ಸಿಕ್ಕಿವೆ. ನಮ್ಮ 1ly Minerals ತಂಡವು ನಿಮ್ಮ ವಿನಂತಿಯನ್ನು ಪರಿಶೀಲಿಸುತ್ತದೆ ಮತ್ತು ಫೋನ್ ಅಥವಾ ಇಮೇಲ್ ಮೂಲಕ ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ. 1ly Minerals ಅನ್ನು ಆಯ್ಕೆ ಮಾಡಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು!",
       invalidMobile: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ 10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.",
-      invalidEmail: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ ಅಥವಾ 'skip' ಎಂದು ಟೈಪ್ ಮಾಡಿ.",
-      invalidPincode: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ 6 ಅಂಕಿಯ ಪಿನ್ ಕೋಡ್ ನಮೂದಿಸಿ.",
-      selectOption: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ.",
+      invalidEmail: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ.",
+      invalidPincode: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ 6 ಅಂಕಿಯ PIN ಕೋಡ್ ನಮೂದಿಸಿ.",
+      selectOption: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ (1, 2, ಅಥವಾ 3).",
       placeholder: "ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಟೈಪ್ ಮಾಡಿ...",
       send: "ಕಳುಹಿಸಿ"
     },
     hi: {
-      initial: "नमस्ते! मैं आपकी कैसे मदद कर सकता हूं?",
-      name: "नमस्ते, मैं 1ly Minerals की ओर से सैम हूं। कृपया अपना पूरा नाम बताएं?",
-      languageSelect: "धन्यवाद, {name}! कृपया अपनी पसंदीदा भाषा चुनें:\n\n1. English\n2. Kannada\n3. Hindi",
-      mobile: "सीधे संपर्क के लिए कृपया अपना मोबाइल नंबर दें?",
-      email: "कृपया अपना ईमेल पता प्रदान करें। (यदि आपके पास नहीं है तो 'skip' टाइप करें)",
-      city: "कृपया अपने शहर या कस्बे का नाम बताएं?",
-      pincode: "कृपया अपना पिन कोड प्रदान करें।",
-      serviceType: "आप किस प्रकार की सेवा की तलाश में हैं?\n\n1. खुदरा ऑर्डर (Retail Order)\n2. व्यापार/वितरक पूछताछ (Business/Distributor)\n3. सह-पैकिंग (Co-packing)\n4. सामान्य जानकारी (General Information)",
-      requirements: "कृपया अपने विशिष्ट ऑर्डर या पूछताछ विवरण साझा करें:\n\n• उत्पाद का आकार (200ml, 500ml, 1 Liter, 2 Liters)\n• मात्रा (बक्से/बोतलें)\n• ऑर्डर का उद्देश्य",
-      completion: "हमारे पास सभी आवश्यक जानकारी है! हमारी 1ly Minerals टीम आपके विवरण और आवश्यकताओं की समीक्षा करेगी और फोन या ईमेल के माध्यम से जल्द ही आपसे संपर्क करेगी। 1ly Minerals चुनने के लिए धन्यवाद!",
+      initial: "नमस्ते! मैं 1ly Minerals की ओर से सैम हूं। मैं आपकी कैसे मदद कर सकता हूं? कृपया एक विकल्प चुनें:\n\n1. नया ऑर्डर दें\n2. सामान्य पूछताछ / संपर्क\n3. डिलीवरी स्थिति जांचें",
+      languageSelect: "धन्यवाद! हम आगे बढ़ने से पहले, आप कौन सी भाषा पसंद करेंगे? कृपया एक विकल्प चुनें:\n\n1. English\n2. Kannada\n3. Hindi",
+      mobile: "बढ़िया! कृपया अपना मोबाइल नंबर साझा करें ताकि हम आपके अनुरोध के संबंध में आपसे संपर्क कर सकें।",
+      email: "धन्यवाद। क्या मैं आपका ईमेल पता भी ले सकती हूं? (यदि आपके पास नहीं है या साझा नहीं करना चाहते तो 'skip' टाइप करें)",
+      name: "और अंत में, कृपया अपना पूरा नाम साझा करें।",
+      city: "सेवा उपलब्धता जांचने के लिए, कृपया अपने शहर/कस्बे का नाम साझा करें।",
+      pincode: "और अंत में, सटीक मैपिंग के लिए, कृपया अपना PIN कोड प्रदान करें।",
+      customerType: "आप किस प्रकार के ग्राहक हैं? (उदाहरण के लिए, खुदरा विक्रेता, वितरक, अंतिम ग्राहक)।",
+      requirements: "कृपया अपनी विशिष्ट ऑर्डर आवश्यकताएं साझा करें: उत्पाद का आकार (उदाहरण के लिए, 200ml, 1 Liter), मात्रा (बक्से/बोतलें), और उद्देश्य।",
+      completion: "धन्यवाद! हमारे पास सभी विवरण हैं। हमारी 1ly Minerals टीम आपके अनुरोध की समीक्षा करेगी और फोन या ईमेल के माध्यम से जल्द ही आपसे संपर्क करेगी। 1ly Minerals चुनने के लिए धन्यवाद!",
       invalidMobile: "कृपया एक मान्य 10 अंकों का मोबाइल नंबर दर्ज करें।",
-      invalidEmail: "कृपया एक मान्य ईमेल पता दर्ज करें या 'skip' टाइप करें।",
-      invalidPincode: "कृपया एक मान्य 6 अंकों का पिन कोड दर्ज करें।",
-      selectOption: "कृपया एक मान्य विकल्प चुनें।",
+      invalidEmail: "कृपया एक मान्य ईमेल पता दर्ज करें।",
+      invalidPincode: "कृपया एक मान्य 6 अंकों का PIN कोड दर्ज करें।",
+      selectOption: "कृपया एक मान्य विकल्प चुनें (1, 2, या 3)।",
       placeholder: "अपना संदेश लिखें...",
       send: "भेजें"
     }
   };
 
-  const serviceTypes = {
-    '1': 'Retail Order',
-    '2': 'Business/Distributor Inquiry',
-    '3': 'Co-packing',
-    '4': 'General Information',
-    'retail': 'Retail Order',
-    'retail order': 'Retail Order',
-    'business': 'Business/Distributor Inquiry',
-    'distributor': 'Business/Distributor Inquiry',
-    'co-packing': 'Co-packing',
-    'copacking': 'Co-packing',
-    'general': 'General Information',
-    'information': 'General Information'
+  const intents = {
+    '1': 'order',
+    '2': 'inquiry',
+    '3': 'delivery',
+    'place': 'order',
+    'order': 'order',
+    'new order': 'order',
+    'inquiry': 'inquiry',
+    'contact': 'inquiry',
+    'general': 'inquiry',
+    'delivery': 'delivery',
+    'status': 'delivery',
+    'check': 'delivery'
   };
 
   const languages = {
@@ -99,7 +100,10 @@ const OrderBot = () => {
     '3': 'hi',
     'english': 'en',
     'kannada': 'kn',
-    'hindi': 'hi'
+    'hindi': 'hi',
+    'en': 'en',
+    'kn': 'kn',
+    'hi': 'hi'
   };
 
   // Auto-scroll to bottom when new messages arrive
@@ -162,37 +166,35 @@ const OrderBot = () => {
   };
 
   const processUserInput = (input) => {
-    const lowerInput = input.toLowerCase();
+    const lowerInput = input.toLowerCase().trim();
 
     switch (conversationState) {
       case 'initial':
-        // User responds to initial greeting, ask for name
-        setConversationState('name');
-        addBotMessage(content.en.name);
-        break;
-
-      case 'name':
-        setOrderData(prev => ({ ...prev, name: input }));
-        setConversationState('languageSelect');
-        const firstName = input.split(' ')[0];
-        // Use English for language selection since language hasn't been chosen yet
-        const langSelectText = content.en.languageSelect.replace('{name}', firstName);
-        addBotMessage(langSelectText);
+        // Step 1: User selects intent (1, 2, or 3)
+        const selectedIntent = intents[lowerInput] || intents[input];
+        if (selectedIntent) {
+          setOrderData(prev => ({ ...prev, intent: selectedIntent }));
+          setConversationState('languageSelect');
+          addBotMessage(content.en.languageSelect);
+        } else {
+          addBotMessage("Please select a valid option (1, 2, or 3).");
+        }
         break;
 
       case 'languageSelect':
+        // Step 2: Language preference
         const selectedLang = languages[lowerInput] || languages[input];
         if (selectedLang) {
           setLanguage(selectedLang);
           setConversationState('mobile');
           addBotMessage(content[selectedLang].mobile);
         } else {
-          // Use English error message since language selection hasn't been completed
           addBotMessage("Please select a valid option (1 for English, 2 for Kannada, 3 for Hindi).");
         }
         break;
 
       case 'mobile':
+        // Step 3: Mobile number
         const cleanMobile = input.replace(/\D/g, '');
         if (validateMobile(cleanMobile)) {
           setOrderData(prev => ({ ...prev, mobile: cleanMobile }));
@@ -204,59 +206,76 @@ const OrderBot = () => {
         break;
 
       case 'email':
+        // Step 4: Email address (optional)
         if (lowerInput === 'skip' || lowerInput === 'no' || lowerInput === 'na' || lowerInput === '') {
           setOrderData(prev => ({ ...prev, email: '' }));
-          setConversationState('city');
-          addBotMessage(getText('city'));
+          setConversationState('name');
+          addBotMessage(getText('name'));
         } else if (validateEmail(input)) {
           setOrderData(prev => ({ ...prev, email: input }));
-          setConversationState('city');
-          addBotMessage(getText('city'));
+          setConversationState('name');
+          addBotMessage(getText('name'));
         } else {
           addBotMessage(getText('invalidEmail'));
         }
         break;
 
+      case 'name':
+        // Step 5: Full name
+        setOrderData(prev => ({ ...prev, name: input }));
+        setConversationState('city');
+        addBotMessage(getText('city'));
+        break;
+
       case 'city':
+        // Step 6: City/Town
         setOrderData(prev => ({ ...prev, city: input }));
         setConversationState('pincode');
         addBotMessage(getText('pincode'));
         break;
 
       case 'pincode':
+        // Step 7: PIN code
         const cleanPincode = input.replace(/\D/g, '');
         if (validatePincode(cleanPincode)) {
+          const currentIntent = orderData.intent;
           setOrderData(prev => ({ ...prev, pincode: cleanPincode }));
-          setConversationState('serviceType');
-          addBotMessage(getText('serviceType'));
+          
+          // Step 8: Intent-specific questions (only for orders)
+          if (currentIntent === 'order') {
+            setConversationState('customerType');
+            addBotMessage(getText('customerType'));
+          } else {
+            // For inquiry or delivery, skip to completion
+            setConversationState('complete');
+            addBotMessage(getText('completion'));
+            submitOrder({ ...orderData, pincode: cleanPincode });
+          }
         } else {
           addBotMessage(getText('invalidPincode'));
         }
         break;
 
-      case 'serviceType':
-        const type = serviceTypes[lowerInput] || serviceTypes[input.toLowerCase()];
-        if (type) {
-          setOrderData(prev => ({ ...prev, serviceType: type }));
-          setConversationState('requirements');
-          addBotMessage(getText('requirements'));
-        } else {
-          addBotMessage(getText('selectOption'));
-        }
+      case 'customerType':
+        // Step 8A: Customer type (only for orders)
+        setOrderData(prev => ({ ...prev, customerType: input }));
+        setConversationState('requirements');
+        addBotMessage(getText('requirements'));
         break;
 
       case 'requirements':
+        // Step 8B: Order requirements (only for orders)
         setOrderData(prev => ({ ...prev, requirements: input }));
         setConversationState('complete');
         addBotMessage(getText('completion'));
         
-        // Log the collected data (in production, send to backend)
+        // Log the collected data
         console.log('Order Data Collected:', {
           ...orderData,
           requirements: input
         });
         
-        // Optional: Send data to backend
+        // Send data to backend
         submitOrder({ ...orderData, requirements: input });
         break;
 
@@ -295,19 +314,20 @@ const OrderBot = () => {
     setConversationState('initial');
     setLanguage('');
     setOrderData({
+      intent: '',
       name: '',
       mobile: '',
       email: '',
       city: '',
       pincode: '',
-      serviceType: '',
+      customerType: '',
       requirements: ''
     });
     addBotMessage(content.en.initial);
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = '919848742834';
+    const phoneNumber = '917090009669'; // +91 7090009669
     const whatsappUrl = `https://wa.me/${phoneNumber}`;
     window.open(whatsappUrl, '_blank');
   };

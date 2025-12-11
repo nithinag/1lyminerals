@@ -175,6 +175,34 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Developer Credit */
+.developer-credit {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.developer-credit p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.developer-link {
+  color: var(--primary-red-light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-fast);
+  border-bottom: 1px solid transparent;
+}
+
+.developer-link:hover {
+  color: var(--primary-red);
+  border-bottom-color: var(--primary-red);
+}
+
 /* Back to Top Button */
 .back-to-top {
   position: fixed;
@@ -267,7 +295,7 @@
   .footer-logo-image {
     height: 45px;
   }
-
+  
   .footer-logo .logo-text {
     font-size: 2rem;
   }

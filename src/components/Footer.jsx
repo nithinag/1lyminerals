@@ -13,8 +13,8 @@ const Footer = () => {
               <div className="footer-logo">
                 <img src="/logo.svg" alt="1LY MINERALS Logo" className="footer-logo-image" />
                 <div className="footer-logo-text-wrapper">
-                  <span className="logo-text">1LY</span>
-                  <span className="logo-sub">MINERALS</span>
+                <span className="logo-text">1LY</span>
+                <span className="logo-sub">MINERALS</span>
                 </div>
               </div>
               <p className="footer-tagline">
@@ -80,6 +80,19 @@ const Footer = () => {
               
                 <span className="badge">♻️ Eco-Friendly</span>
               </div>
+            </div>
+            <div className="developer-credit">
+              <p>
+                For questions regarding the website's performance or design, please contact the developer,{' '}
+                <a 
+                  href="https://www.linkedin.com/in/nithinnagabushanam6611" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="developer-link"
+                >
+                  NITHIN NAGABUSHANAM
+                </a>
+              </p>
             </div>
           </div>
         </div>

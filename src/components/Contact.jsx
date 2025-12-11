@@ -64,13 +64,13 @@ ${formData.message}
     try {
       await emailjs.send(serviceID, templateID, templateParams, publicKey);
       setFormStatus('Thank you! Your message has been sent successfully. We will get back to you soon.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
+    });
     } catch (error) {
       console.error('Email sending failed:', error);
       setFormStatus('Sorry, there was an error sending your message. Please try again or contact us directly.');
