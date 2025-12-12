@@ -53,7 +53,7 @@ const Footer = () => {
               <ul className="footer-contact">
                 <li>
                   <span className="contact-icon"><i className="fas fa-map-marker-alt"></i></span>
-                  <span>Avalahalli, Bangalore - 560 049</span>
+                  <span>#123, Avalahalli, Bangalore <br /> - 560 049</span>
                 </li>
                 <li>
                   <span className="contact-icon"><i className="fas fa-phone"></i></span>
@@ -61,7 +61,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <span className="contact-icon"><i className="fas fa-envelope"></i></span>
-                  <a href="mailto:ilyminerals@gmail.com">ilyminerals@gmail.com</a>
+                  <a href="mailto:1lyminerals@gmail.com">1lyminerals@gmail.com</a>
                 </li>
               </ul>
             </div>
