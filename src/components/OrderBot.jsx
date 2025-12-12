@@ -15,7 +15,12 @@ const OrderBot = () => {
     city: '',
     pincode: '',
     customerType: '',
-    requirements: ''
+    productSize: '',
+    quantity: '',
+    purpose: '',
+    requirements: '', // Will be auto-generated from above
+    orderNumber: '', // For delivery tracking
+    deliveryStatus: '' // For delivery tracking
   });
   
   const messagesEndRef = useRef(null);
@@ -32,9 +37,17 @@ const OrderBot = () => {
       city: "To check service availability, please share your city/town name.",
       pincode: "And finally, for accurate mapping, please provide your PIN code.",
       customerType: "What type of customer are you? (e.g., Retailer, Distributor, End Customer).",
-      requirements: "Please share your specific order requirements: product size (e.g., 200ml, 1 Liter), quantity (boxes/bottles), and the purpose.",
+      productSize: "Please select the product size you need:",
+      quantity: "How many cases would you like to order?",
+      purpose: "What is the purpose of this order?",
+      requirements: "Please share your specific order requirements: product size (e.g., 200ml, 1 litre), quantity (boxes/bottles), and the purpose.",
+      orderNumber: "To check your delivery status, please provide your Order Number or Tracking ID.",
+      deliveryMobile: "Please share the mobile number associated with your order for verification.",
+      deliveryStatus: "Your order status will be checked shortly. Our team will contact you with the details.",
+      deliveryCompletion: "Thank you! We have received your delivery status request. Our team will check your order and contact you shortly with the delivery status via phone. Thank you for choosing 1ly Minerals!",
       completion: "Thank you! We have all the details. Our 1ly Minerals team will review your request and contact you shortly via phone or email. Thank you for choosing 1ly Minerals!",
       invalidMobile: "Please enter a valid 10-digit mobile number.",
+      invalidOrderNumber: "Please enter a valid Order Number or Tracking ID.",
       invalidEmail: "Please enter a valid email address.",
       invalidPincode: "Please enter a valid 6-digit PIN code.",
       selectOption: "Please select a valid option (1, 2, or 3).",
@@ -50,9 +63,17 @@ const OrderBot = () => {
       city: "ಸೇವಾ ಲಭ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಲು, ದಯವಿಟ್ಟು ನಿಮ್ಮ ನಗರ/ಪಟ್ಟಣದ ಹೆಸರನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
       pincode: "ಮತ್ತು ಅಂತಿಮವಾಗಿ, ನಿಖರವಾದ ಮ್ಯಾಪಿಂಗ್ಗಾಗಿ, ದಯವಿಟ್ಟು ನಿಮ್ಮ PIN ಕೋಡ್ ನೀಡಿ.",
       customerType: "ನೀವು ಯಾವ ರೀತಿಯ ಗ್ರಾಹಕ? (ಉದಾಹರಣೆಗೆ, ಚಿಲ್ಲರೆ ವ್ಯಾಪಾರಿ, ವಿತರಕ, ಅಂತಿಮ ಗ್ರಾಹಕ).",
-      requirements: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಆದೇಶದ ಅವಶ್ಯಕತೆಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ: ಉತ್ಪನ್ನ ಗಾತ್ರ (ಉದಾಹರಣೆಗೆ, 200ml, 1 Liter), ಪ್ರಮಾಣ (ಪೆಟ್ಟಿಗೆಗಳು/ಬಾಟಲಿಗಳು), ಮತ್ತು ಉದ್ದೇಶ.",
+      productSize: "ದಯವಿಟ್ಟು ನಿಮಗೆ ಬೇಕಾದ ಉತ್ಪನ್ನ ಗಾತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+      quantity: "ನೀವು ಎಷ್ಟು ಪೆಟ್ಟಿಗೆಗಳನ್ನು ಆರ್ಡರ್ ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?",
+      purpose: "ಈ ಆದೇಶದ ಉದ್ದೇಶ ಏನು?",
+      requirements: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಆದೇಶದ ಅವಶ್ಯಕತೆಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ: ಉತ್ಪನ್ನ ಗಾತ್ರ (ಉದಾಹರಣೆಗೆ, 200ml, 1 litre), ಪ್ರಮಾಣ (ಪೆಟ್ಟಿಗೆಗಳು/ಬಾಟಲಿಗಳು), ಮತ್ತು ಉದ್ದೇಶ.",
+      orderNumber: "ನಿಮ್ಮ ವಿತರಣಾ ಸ್ಥಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಲು, ದಯವಿಟ್ಟು ನಿಮ್ಮ ಆರ್ಡರ್ ಸಂಖ್ಯೆ ಅಥವಾ ಟ್ರ್ಯಾಕಿಂಗ್ ID ನೀಡಿ.",
+      deliveryMobile: "ಪರಿಶೀಲನೆಗಾಗಿ, ದಯವಿಟ್ಟು ನಿಮ್ಮ ಆರ್ಡರ್‌ಗೆ ಸಂಬಂಧಿಸಿದ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
+      deliveryStatus: "ನಿಮ್ಮ ಆರ್ಡರ್ ಸ್ಥಿತಿಯನ್ನು ಶೀಘ್ರದಲ್ಲೇ ಪರಿಶೀಲಿಸಲಾಗುತ್ತದೆ. ನಮ್ಮ ತಂಡವು ವಿವರಗಳೊಂದಿಗೆ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ.",
+      deliveryCompletion: "ಧನ್ಯವಾದಗಳು! ನಾವು ನಿಮ್ಮ ವಿತರಣಾ ಸ್ಥಿತಿ ವಿನಂತಿಯನ್ನು ಸ್ವೀಕರಿಸಿದ್ದೇವೆ. ನಮ್ಮ ತಂಡವು ನಿಮ್ಮ ಆರ್ಡರ್ ಅನ್ನು ಪರಿಶೀಲಿಸುತ್ತದೆ ಮತ್ತು ಫೋನ್ ಮೂಲಕ ವಿತರಣಾ ಸ್ಥಿತಿಯೊಂದಿಗೆ ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ. 1ly Minerals ಅನ್ನು ಆಯ್ಕೆ ಮಾಡಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು!",
       completion: "ಧನ್ಯವಾದಗಳು! ನಮಗೆ ಎಲ್ಲಾ ವಿವರಗಳು ಸಿಕ್ಕಿವೆ. ನಮ್ಮ 1ly Minerals ತಂಡವು ನಿಮ್ಮ ವಿನಂತಿಯನ್ನು ಪರಿಶೀಲಿಸುತ್ತದೆ ಮತ್ತು ಫೋನ್ ಅಥವಾ ಇಮೇಲ್ ಮೂಲಕ ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ. 1ly Minerals ಅನ್ನು ಆಯ್ಕೆ ಮಾಡಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು!",
       invalidMobile: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ 10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.",
+      invalidOrderNumber: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಆರ್ಡರ್ ಸಂಖ್ಯೆ ಅಥವಾ ಟ್ರ್ಯಾಕಿಂಗ್ ID ನಮೂದಿಸಿ.",
       invalidEmail: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ.",
       invalidPincode: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ 6 ಅಂಕಿಯ PIN ಕೋಡ್ ನಮೂದಿಸಿ.",
       selectOption: "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ (1, 2, ಅಥವಾ 3).",
@@ -68,9 +89,17 @@ const OrderBot = () => {
       city: "सेवा उपलब्धता जांचने के लिए, कृपया अपने शहर/कस्बे का नाम साझा करें।",
       pincode: "और अंत में, सटीक मैपिंग के लिए, कृपया अपना PIN कोड प्रदान करें।",
       customerType: "आप किस प्रकार के ग्राहक हैं? (उदाहरण के लिए, खुदरा विक्रेता, वितरक, अंतिम ग्राहक)।",
-      requirements: "कृपया अपनी विशिष्ट ऑर्डर आवश्यकताएं साझा करें: उत्पाद का आकार (उदाहरण के लिए, 200ml, 1 Liter), मात्रा (बक्से/बोतलें), और उद्देश्य।",
+      productSize: "कृपया उत्पाद का आकार चुनें जिसकी आपको आवश्यकता है:",
+      quantity: "आप कितने केस ऑर्डर करना चाहेंगे?",
+      purpose: "इस ऑर्डर का उद्देश्य क्या है?",
+      requirements: "कृपया अपनी विशिष्ट ऑर्डर आवश्यकताएं साझा करें: उत्पाद का आकार (उदाहरण के लिए, 200ml, 1 litre), मात्रा (बक्से/बोतलें), और उद्देश्य।",
+      orderNumber: "अपनी डिलीवरी स्थिति जांचने के लिए, कृपया अपना ऑर्डर नंबर या ट्रैकिंग ID प्रदान करें।",
+      deliveryMobile: "सत्यापन के लिए, कृपया अपने ऑर्डर से जुड़ा मोबाइल नंबर साझा करें।",
+      deliveryStatus: "आपकी ऑर्डर स्थिति जल्द ही जांची जाएगी। हमारी टीम विवरणों के साथ आपसे संपर्क करेगी।",
+      deliveryCompletion: "धन्यवाद! हमने आपका डिलीवरी स्थिति अनुरोध प्राप्त कर लिया है। हमारी टीम आपके ऑर्डर की जांच करेगी और फोन के माध्यम से डिलीवरी स्थिति के साथ जल्द ही आपसे संपर्क करेगी। 1ly Minerals चुनने के लिए धन्यवाद!",
       completion: "धन्यवाद! हमारे पास सभी विवरण हैं। हमारी 1ly Minerals टीम आपके अनुरोध की समीक्षा करेगी और फोन या ईमेल के माध्यम से जल्द ही आपसे संपर्क करेगी। 1ly Minerals चुनने के लिए धन्यवाद!",
       invalidMobile: "कृपया एक मान्य 10 अंकों का मोबाइल नंबर दर्ज करें।",
+      invalidOrderNumber: "कृपया एक मान्य ऑर्डर नंबर या ट्रैकिंग ID दर्ज करें।",
       invalidEmail: "कृपया एक मान्य ईमेल पता दर्ज करें।",
       invalidPincode: "कृपया एक मान्य 6 अंकों का PIN कोड दर्ज करें।",
       selectOption: "कृपया एक मान्य विकल्प चुनें (1, 2, या 3)।",
@@ -121,13 +150,18 @@ const OrderBot = () => {
   // Initialize conversation
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      addBotMessage(content.en.initial);
+      const initialButtons = [
+        { label: '1. Place a New Order', value: '1' },
+        { label: '2. General Inquiry / Contact', value: '2' },
+        { label: '3. Check Delivery Status', value: '3' }
+      ];
+      addBotMessage(content.en.initial, 100, initialButtons);
     }
   }, [isOpen]);
 
-  const addBotMessage = (text, delay = 500) => {
+  const addBotMessage = (text, delay = 500, buttons = null) => {
     setTimeout(() => {
-      setMessages(prev => [...prev, { type: 'bot', text, timestamp: new Date() }]);
+      setMessages(prev => [...prev, { type: 'bot', text, timestamp: new Date(), buttons }]);
     }, delay);
   };
 
@@ -165,6 +199,11 @@ const OrderBot = () => {
     processUserInput(input);
   };
 
+  const handleButtonClick = (value) => {
+    addUserMessage(value);
+    processUserInput(value);
+  };
+
   const processUserInput = (input) => {
     const lowerInput = input.toLowerCase().trim();
 
@@ -175,9 +214,19 @@ const OrderBot = () => {
         if (selectedIntent) {
           setOrderData(prev => ({ ...prev, intent: selectedIntent }));
           setConversationState('languageSelect');
-          addBotMessage(content.en.languageSelect);
+          const langButtons = [
+            { label: '1. English', value: '1' },
+            { label: '2. Kannada', value: '2' },
+            { label: '3. Hindi', value: '3' }
+          ];
+          addBotMessage(content.en.languageSelect, 100, langButtons);
         } else {
-          addBotMessage("Please select a valid option (1, 2, or 3).");
+          const initialButtons = [
+            { label: '1. Place a New Order', value: '1' },
+            { label: '2. General Inquiry / Contact', value: '2' },
+            { label: '3. Check Delivery Status', value: '3' }
+          ];
+          addBotMessage("Please select a valid option (1, 2, or 3).", 100, initialButtons);
         }
         break;
 
@@ -186,20 +235,32 @@ const OrderBot = () => {
         const selectedLang = languages[lowerInput] || languages[input];
         if (selectedLang) {
           setLanguage(selectedLang);
-          setConversationState('mobile');
-          addBotMessage(content[selectedLang].mobile);
+          // For delivery status, skip to order number directly
+          if (orderData.intent === 'delivery') {
+            setConversationState('orderNumber');
+            addBotMessage(content[selectedLang].orderNumber);
+          } else {
+            setConversationState('mobile');
+            addBotMessage(content[selectedLang].mobile);
+          }
         } else {
-          addBotMessage("Please select a valid option (1 for English, 2 for Kannada, 3 for Hindi).");
+          const langButtons = [
+            { label: '1. English', value: '1' },
+            { label: '2. Kannada', value: '2' },
+            { label: '3. Hindi', value: '3' }
+          ];
+          addBotMessage("Please select a valid option (1 for English, 2 for Kannada, 3 for Hindi).", 100, langButtons);
         }
         break;
 
       case 'mobile':
-        // Step 3: Mobile number
+        // Step 3: Mobile number (not needed for delivery status)
         const cleanMobile = input.replace(/\D/g, '');
         if (validateMobile(cleanMobile)) {
           setOrderData(prev => ({ ...prev, mobile: cleanMobile }));
           setConversationState('email');
-          addBotMessage(getText('email'));
+          const skipButton = [{ label: 'Skip', value: 'skip' }];
+          addBotMessage(getText('email'), 100, skipButton);
         } else {
           addBotMessage(getText('invalidMobile'));
         }
@@ -207,7 +268,7 @@ const OrderBot = () => {
 
       case 'email':
         // Step 4: Email address (optional)
-        if (lowerInput === 'skip' || lowerInput === 'no' || lowerInput === 'na' || lowerInput === '') {
+        if (lowerInput === 'skip' || lowerInput === 'no' || lowerInput === 'na' || lowerInput === '' || lowerInput === 'skip email') {
           setOrderData(prev => ({ ...prev, email: '' }));
           setConversationState('name');
           addBotMessage(getText('name'));
@@ -216,7 +277,8 @@ const OrderBot = () => {
           setConversationState('name');
           addBotMessage(getText('name'));
         } else {
-          addBotMessage(getText('invalidEmail'));
+          const skipButton = [{ label: 'Skip', value: 'skip' }];
+          addBotMessage(getText('invalidEmail'), 100, skipButton);
         }
         break;
 
@@ -244,9 +306,14 @@ const OrderBot = () => {
           // Step 8: Intent-specific questions (only for orders)
           if (currentIntent === 'order') {
             setConversationState('customerType');
-            addBotMessage(getText('customerType'));
+            const customerTypeButtons = [
+              { label: '1. Retailer', value: 'Retailer' },
+              { label: '2. Distributor', value: 'Distributor' },
+              { label: '3. End Customer', value: 'End Customer' }
+            ];
+            addBotMessage(getText('customerType'), 100, customerTypeButtons);
           } else {
-            // For inquiry or delivery, skip to completion
+            // For inquiry, skip to completion
             setConversationState('complete');
             addBotMessage(getText('completion'));
             submitOrder({ ...orderData, pincode: cleanPincode });
@@ -258,25 +325,187 @@ const OrderBot = () => {
 
       case 'customerType':
         // Step 8A: Customer type (only for orders)
-        setOrderData(prev => ({ ...prev, customerType: input }));
-        setConversationState('requirements');
-        addBotMessage(getText('requirements'));
+        // Accept common variations
+        const customerTypeLower = lowerInput;
+        let validCustomerType = input;
+        
+        if (customerTypeLower.includes('retailer') || customerTypeLower === '1') {
+          validCustomerType = 'Retailer';
+        } else if (customerTypeLower.includes('distributor') || customerTypeLower === '2') {
+          validCustomerType = 'Distributor';
+        } else if (customerTypeLower.includes('end') || customerTypeLower.includes('customer') || customerTypeLower === '3') {
+          validCustomerType = 'End Customer';
+        }
+        
+        setOrderData(prev => ({ ...prev, customerType: validCustomerType }));
+        setConversationState('productSize');
+        const productSizeButtons = [
+          { label: '1. 200ml', value: '200ml' },
+          { label: '2. 500ml', value: '500ml' },
+          { label: '3. 1 Litre', value: '1 Litre' }
+        ];
+        addBotMessage(getText('productSize'), 100, productSizeButtons);
         break;
 
-      case 'requirements':
-        // Step 8B: Order requirements (only for orders)
-        setOrderData(prev => ({ ...prev, requirements: input }));
+      case 'productSize':
+        // Step 8B: Product size selection
+        // Accept button clicks or typed input
+        let selectedSize = input;
+        if (lowerInput.includes('200') || lowerInput === '200ml' || lowerInput === '1' || lowerInput.startsWith('1.')) {
+          selectedSize = '200ml';
+        } else if (lowerInput.includes('500') || lowerInput === '500ml' || lowerInput === '2' || lowerInput.startsWith('2.')) {
+          selectedSize = '500ml';
+        } else if (lowerInput.includes('1') && (lowerInput.includes('litre') || lowerInput.includes('liter') || lowerInput.includes('l')) || lowerInput === '3' || lowerInput.startsWith('3.')) {
+          selectedSize = '1 Litre';
+        } else {
+          // If input doesn't match, show buttons again
+          const productSizeButtons = [
+            { label: '1. 200ml', value: '200ml' },
+            { label: '2. 500ml', value: '500ml' },
+            { label: '3. 1 Litre', value: '1 Litre' }
+          ];
+          addBotMessage("Please select a valid product size (1, 2, or 3).", 100, productSizeButtons);
+          return;
+        }
+        
+        setOrderData(prev => ({ ...prev, productSize: selectedSize }));
+        setConversationState('quantity');
+        const quantityButtons = [
+          { label: '1. 1 Case (15 bottles)', value: '1 Case' },
+          { label: '2. 2 Cases (30 bottles)', value: '2 Cases' },
+          { label: '3. 5 Cases (75 bottles)', value: '5 Cases' },
+          { label: '4. 10 Cases (150 bottles)', value: '10 Cases' },
+          { label: '5. Custom Quantity', value: 'Custom' }
+        ];
+        addBotMessage(getText('quantity'), 100, quantityButtons);
+        break;
+
+      case 'quantity':
+        // Step 8C: Quantity selection
+        if (lowerInput === 'custom' || lowerInput.includes('custom') || lowerInput === '5' || lowerInput.startsWith('5.')) {
+          // User wants to enter custom quantity, ask for it
+          setConversationState('quantityCustom');
+          addBotMessage("Please enter the number of cases you need:");
+        } else {
+          // Accept button clicks or typed input
+          let selectedQuantity = input;
+          if (lowerInput.includes('1 case') || lowerInput === '1' || lowerInput.startsWith('1.') || lowerInput.includes('one case')) {
+            selectedQuantity = '1 Case';
+          } else if (lowerInput.includes('2 case') || lowerInput === '2' || lowerInput.startsWith('2.') || lowerInput.includes('two case')) {
+            selectedQuantity = '2 Cases';
+          } else if (lowerInput.includes('5 case') || lowerInput === '3' || lowerInput.startsWith('3.') || lowerInput.includes('five case')) {
+            selectedQuantity = '5 Cases';
+          } else if (lowerInput.includes('10 case') || lowerInput === '4' || lowerInput.startsWith('4.') || lowerInput.includes('ten case')) {
+            selectedQuantity = '10 Cases';
+          } else {
+            // If input doesn't match, show buttons again
+            const quantityButtons = [
+              { label: '1. 1 Case (15 bottles)', value: '1 Case' },
+              { label: '2. 2 Cases (30 bottles)', value: '2 Cases' },
+              { label: '3. 5 Cases (75 bottles)', value: '5 Cases' },
+              { label: '4. 10 Cases (150 bottles)', value: '10 Cases' },
+              { label: '5. Custom Quantity', value: 'Custom' }
+            ];
+            addBotMessage("Please select a valid quantity option (1-5).", 100, quantityButtons);
+            return;
+          }
+          
+          setOrderData(prev => ({ ...prev, quantity: selectedQuantity }));
+          setConversationState('purpose');
+          const purposeButtons = [
+            { label: '1. Retail Sale', value: 'Retail Sale' },
+            { label: '2. Distribution', value: 'Distribution' },
+            { label: '3. Personal Use', value: 'Personal Use' },
+            { label: '4. Event/Function', value: 'Event/Function' },
+            { label: '5. Other', value: 'Other' }
+          ];
+          addBotMessage(getText('purpose'), 100, purposeButtons);
+        }
+        break;
+
+      case 'quantityCustom':
+        // Step 8C-Alt: Custom quantity input
+        setOrderData(prev => ({ ...prev, quantity: input }));
+        setConversationState('purpose');
+        const purposeButtons = [
+          { label: '1. Retail Sale', value: 'Retail Sale' },
+          { label: '2. Distribution', value: 'Distribution' },
+          { label: '3. Personal Use', value: 'Personal Use' },
+          { label: '4. Event/Function', value: 'Event/Function' },
+          { label: '5. Other', value: 'Other' }
+        ];
+        addBotMessage(getText('purpose'), 100, purposeButtons);
+        break;
+
+      case 'purpose':
+        // Step 8D: Purpose selection
+        // Accept button clicks or typed input
+        let selectedPurpose = input;
+        if (lowerInput.includes('retail') || lowerInput === '1' || lowerInput.startsWith('1.')) {
+          selectedPurpose = 'Retail Sale';
+        } else if (lowerInput.includes('distribut') || lowerInput === '2' || lowerInput.startsWith('2.')) {
+          selectedPurpose = 'Distribution';
+        } else if (lowerInput.includes('personal') || lowerInput === '3' || lowerInput.startsWith('3.')) {
+          selectedPurpose = 'Personal Use';
+        } else if (lowerInput.includes('event') || lowerInput.includes('function') || lowerInput === '4' || lowerInput.startsWith('4.')) {
+          selectedPurpose = 'Event/Function';
+        } else if (lowerInput === 'other' || lowerInput === '5' || lowerInput.startsWith('5.')) {
+          selectedPurpose = 'Other';
+        } else {
+          // If input doesn't match, show buttons again
+          const purposeButtons = [
+            { label: '1. Retail Sale', value: 'Retail Sale' },
+            { label: '2. Distribution', value: 'Distribution' },
+            { label: '3. Personal Use', value: 'Personal Use' },
+            { label: '4. Event/Function', value: 'Event/Function' },
+            { label: '5. Other', value: 'Other' }
+          ];
+          addBotMessage("Please select a valid purpose option (1-5).", 100, purposeButtons);
+          return;
+        }
+        
+        setOrderData(prev => {
+          // Auto-generate requirements string from collected data
+          const requirements = `Product Size: ${prev.productSize}, Quantity: ${prev.quantity}, Purpose: ${selectedPurpose}`;
+          const updatedData = { ...prev, purpose: selectedPurpose, requirements };
+          
+          // Log the collected data
+          console.log('Order Data Collected:', updatedData);
+          
+          // Send data to backend
+          submitOrder(updatedData);
+          
+          return updatedData;
+        });
         setConversationState('complete');
         addBotMessage(getText('completion'));
-        
-        // Log the collected data
-        console.log('Order Data Collected:', {
-          ...orderData,
-          requirements: input
+        break;
+
+      case 'orderNumber':
+        // Step 3: Order Number/Tracking ID for delivery tracking (simplified flow)
+        if (input.trim().length < 3) {
+          addBotMessage(getText('invalidOrderNumber'));
+          return;
+        }
+        setOrderData(prev => {
+          const updatedData = { ...prev, orderNumber: input.trim() };
+          
+          // Log the delivery tracking request
+          console.log('Delivery Status Request:', {
+            orderNumber: input.trim(),
+            intent: 'delivery'
+          });
+          
+          // Send delivery status request to backend
+          submitOrder(updatedData);
+          
+          return updatedData;
         });
-        
-        // Send data to backend
-        submitOrder({ ...orderData, requirements: input });
+        setConversationState('complete');
+        addBotMessage(getText('deliveryStatus'), 500);
+        setTimeout(() => {
+          addBotMessage(getText('deliveryCompletion'), 1000);
+        }, 1500);
         break;
 
       default:
@@ -396,6 +625,19 @@ const OrderBot = () => {
                 )}
                 <div className="message-bubble">
                   <div className="message-text">{message.text}</div>
+                  {message.buttons && message.buttons.length > 0 && (
+                    <div className="quick-reply-buttons">
+                      {message.buttons.map((button, btnIndex) => (
+                        <button
+                          key={btnIndex}
+                          className="quick-reply-btn"
+                          onClick={() => handleButtonClick(button.value)}
+                        >
+                          {button.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                   <div className="message-time">
                     {message.timestamp.toLocaleTimeString('en-US', { 
                       hour: '2-digit', 

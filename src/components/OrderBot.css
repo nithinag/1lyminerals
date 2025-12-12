@@ -328,6 +328,74 @@
   text-align: right;
 }
 
+/* Quick Reply Buttons */
+.quick-reply-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.quick-reply-btn {
+  padding: 10px 16px;
+  background: white;
+  color: #E63326;
+  border: 2px solid #E63326;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.quick-reply-btn:hover {
+  background: #E63326;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(230, 51, 38, 0.2);
+}
+
+.quick-reply-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(230, 51, 38, 0.2);
+}
+
+.quick-reply-btn:focus {
+  outline: 2px solid #E63326;
+  outline-offset: 2px;
+}
+
+/* Responsive Quick Reply Buttons */
+@media (max-width: 480px) {
+  .quick-reply-btn {
+    font-size: 12px;
+    padding: 10px 14px;
+    min-height: 44px; /* Maintain touch-friendly size */
+    -webkit-tap-highlight-color: rgba(230, 51, 38, 0.2);
+  }
+  
+  .quick-reply-buttons {
+    gap: 6px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 481px) and (max-width: 768px) {
+  .quick-reply-btn {
+    font-size: 13px;
+    padding: 11px 16px;
+  }
+}
+
 /* Input */
 .order-bot-input {
   padding: 16px 20px;

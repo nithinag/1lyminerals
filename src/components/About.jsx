@@ -25,14 +25,14 @@ const About = () => {
             <h3>Premium Packaged Drinking Water</h3>
             <p>
               <strong>1LY MINERALS</strong> is a premium packaged drinking water brand headquartered 
-              in Bangalore, dedicated to delivering safe, healthy, and mineral-enriched water. 
+              in Bangalore, dedicated to delivering safe, healthy and mineral-enriched water. 
               We position ourselves as an <strong>"Industry Leader in Reliability,"</strong> built 
               on a strong foundation of safety and service.
             </p>
             <p>
               Our brand is built on <strong>"The Tradition of Trust"</strong> – a commitment to 
               ensure that every bottle consumed contributes to health and wellness. We believe 
-              that pure water is the foundation of a healthy life, and we're dedicated to making 
+              that pure water is the foundation of a healthy life and we're dedicated to making 
               premium quality water accessible to every household across India.
             </p>
 
