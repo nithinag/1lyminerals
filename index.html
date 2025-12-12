@@ -1,4 +1,4 @@
-<!doctype html>
+<!--<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,4 +15,94 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single-File Click Counter</title>
+
+    <style>
+        /* Basic reset and container styling */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Heading style */
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Button style */
+        #clickButton {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        #clickButton:hover {
+            background-color: #0056b3;
+        }
+
+        /* Counter display style */
+        #countDisplay {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Click Counter</h1>
+        <p>Clicks: <span id="countDisplay">0</span></p>
+        <button id="clickButton">Click Me!</button>
+    </div>
+
+    <script>
+        // 1. Initialize a variable to hold the click count
+        let count = 0;
+
+        // 2. Get references to the HTML elements
+        const clickButton = document.getElementById('clickButton');
+        const countDisplay = document.getElementById('countDisplay');
+
+        // 3. Define the function that runs when the button is clicked
+        function updateCounter() {
+            // Increment the count
+            count++;
+
+            // Update the text content of the HTML element
+            countDisplay.textContent = count;
+        }
+
+        // 4. Attach the function to the button's 'click' event
+        clickButton.addEventListener('click', updateCounter);
+
+        console.log("Single-file script loaded and ready for clicks!");
+    </script>
+</body>
 </html>
