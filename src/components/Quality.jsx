@@ -28,19 +28,6 @@ const Quality = () => {
     }
   ];
 
-  const certifications = [
-    {
-      name: 'FSSAI',
-      description: 'Food Safety and Standards Authority of India',
-      icon: '✓'
-    },
-    {
-      name: 'BIS',
-      description: 'Bureau of Indian Standards',
-      icon: '✓'
-    }
-  ];
-
   return (
     <section className="quality section" id="quality">
       <div className="container">
@@ -70,51 +57,6 @@ const Quality = () => {
                   )}
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Certifications */}
-          <div className="certifications-section">
-            <h3 className="text-center">Certified Trust</h3>
-            <p className="certifications-intro text-center">
-              Fully compliant with national safety and quality standards
-            </p>
-            <div className="certifications-grid">
-              {certifications.map((cert, index) => (
-                <div key={index} className="certification-card">
-                  <div className="cert-badge">
-                    <div className="cert-icon">{cert.icon}</div>
-                  </div>
-                  <h4>{cert.name}</h4>
-                  <p>{cert.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Quality Commitment */}
-          <div className="quality-commitment">
-            <div className="commitment-grid">
-              <div className="commitment-item">
-                <div className="commitment-icon">🎯</div>
-                <h4>100% Safe</h4>
-                <p>Every drop tested for safety and purity</p>
-              </div>
-              <div className="commitment-item">
-                <div className="commitment-icon">🏭</div>
-                <h4>Modern Facility</h4>
-                <p>State-of-the-art manufacturing plants</p>
-              </div>
-              <div className="commitment-item">
-                <div className="commitment-icon">🔍</div>
-                <h4>Rigorous Testing</h4>
-                <p>Multiple quality checkpoints</p>
-              </div>
-              <div className="commitment-item">
-                <div className="commitment-icon">🌱</div>
-                <h4>Eco-Responsible</h4>
-                <p>Sustainable and environmentally conscious</p>
-              </div>
             </div>
           </div>
 

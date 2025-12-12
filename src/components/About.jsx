@@ -2,10 +2,10 @@ import './About.css';
 
 const About = () => {
   return (
-    <section className="about section" id="about">
+    <section className="about section" id="main-content">
       <div className="container">
         <div className="section-header text-center">
-          <span className="section-tag">Who We Are</span>
+          <span className="section-tag">We Are</span>
           <h2>The Tradition of Trust</h2>
           <p className="section-subtitle">
             Delivering safe, healthy, and mineral-enriched water to millions of Indian families
@@ -22,17 +22,17 @@ const About = () => {
               </div>
             </div>
 
-            <h3>Premium Packaged Drinking Water from Bangalore</h3>
+            <h3>Premium Packaged Drinking Water</h3>
             <p>
               <strong>1LY MINERALS</strong> is a premium packaged drinking water brand headquartered 
-              in Bangalore, dedicated to delivering safe, healthy, and mineral-enriched water. 
+              in Bangalore, dedicated to delivering safe, healthy and mineral-enriched water. 
               We position ourselves as an <strong>"Industry Leader in Reliability,"</strong> built 
               on a strong foundation of safety and service.
             </p>
             <p>
               Our brand is built on <strong>"The Tradition of Trust"</strong> – a commitment to 
               ensure that every bottle consumed contributes to health and wellness. We believe 
-              that pure water is the foundation of a healthy life, and we're dedicated to making 
+              that pure water is the foundation of a healthy life and we're dedicated to making 
               premium quality water accessible to every household across India.
             </p>
 
@@ -47,7 +47,7 @@ const About = () => {
               <div className="feature-item">
                 <div className="feature-icon">✓</div>
                 <div className="feature-content">
-                  <h4>FSSAI & BIS Certified</h4>
+                  <h4>FSSAI Certified</h4>
                   <p>Fully compliant with national safety standards</p>
                 </div>
               </div>

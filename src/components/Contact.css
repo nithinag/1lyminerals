@@ -1,11 +1,11 @@
 .contact {
-  background: linear-gradient(180deg, #ffffff 0%, #FFF5F3 100%);
+  background: #ffffff;
 }
 
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 4rem;
+  gap: 2.5rem;
   align-items: start;
 }
 
@@ -18,7 +18,7 @@
 
 .contact-card {
   background: var(--neutral-white);
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   text-align: center;
@@ -27,7 +27,7 @@
 }
 
 .contact-card:hover {
-  border-color: var(--accent-orange-light);
+  border-color: var(--primary-red);
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
 }
@@ -56,12 +56,12 @@
 }
 
 .contact-card a:hover {
-  color: var(--accent-orange);
+  color: var(--primary-red-dark);
 }
 
 .info-box {
-  background: linear-gradient(135deg, var(--primary-red), var(--accent-orange));
-  padding: 2rem;
+  background: var(--primary-red);
+  padding: 1.5rem;
   border-radius: var(--radius-lg);
   color: var(--neutral-white);
   box-shadow: var(--shadow-lg);
@@ -93,7 +93,7 @@
 /* Contact Form */
 .contact-form-wrapper {
   background: var(--neutral-white);
-  padding: 3rem;
+  padding: 2rem;
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xl);
 }
@@ -123,7 +123,7 @@
   border: 2px solid #e0e0e0;
   border-radius: var(--radius-md);
   font-size: 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   transition: var(--transition-fast);
   background: var(--neutral-light);
 }
@@ -156,6 +156,16 @@
   text-align: center;
   font-weight: 600;
   animation: slideIn 0.3s ease;
+  margin-top: 1rem;
+}
+
+.form-status.error {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @keyframes slideIn {

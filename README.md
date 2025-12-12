@@ -103,7 +103,7 @@ npm run preview
 
 ## 📞 Contact Information
 
-- **Head Office**: Avalahall, Bangalore - 560 049
+- **Head Office**: Avalahalli, Bangalore - 560 049
 - **Customer Care**: +91 7090009669
 - **Email**: 1lyminerals@gmail.com
 
