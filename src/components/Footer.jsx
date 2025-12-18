@@ -13,7 +13,7 @@ const Footer = () => {
               <div className="footer-logo">
                 <img src="/logo.svg" alt="ILY MINERALS Logo" className="footer-logo-image" />
                 <div className="footer-logo-text-wrapper">
-                <span className="logo-text">ILY</span>
+                <span className="logo-text">1LY</span>
                 <span className="logo-sub">MINERALS</span>
                 </div>
               </div>
@@ -74,7 +74,7 @@ const Footer = () => {
               {/* Left Side - Copyright */}
               <div className="footer-copyright-section">
                 <p className="copyright">
-                  © {currentYear} ILY MINERALS. All rights reserved.
+                  © {currentYear} 1LY MINERALS. All rights reserved.
                 </p>
               </div>
 
@@ -88,10 +88,10 @@ const Footer = () => {
                   <a href="https://www.youtube.com/channel/UCUQ_zBeZE66kvrGM7g8lB5Q" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="social-icon">
                     <i className="fab fa-youtube"></i>
                   </a>
-                  <a href="https://www.instagram.com/1ly_minerals?igsh=MW5zaGtocGdkY2ZudA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon">
+                  <a href="https://www.instagram.com/1lyminerals/?igsh=MW9qNm9pc2kyYWQ2&utm_source=ig_contact_invite#agram.com/1ly_minerals?igsh=MW5zaGtocGdkY2ZudA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-icon">
                     <i className="fab fa-instagram"></i>
                   </a>
-                  <a href="http://www.linkedin.com/in/1ly-minerals-008006394" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon">
+                  <a href="https://www.linkedin.com/company/1lyminerals/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon">
                     <i className="fab fa-linkedin-in"></i>
                   </a>
                 </div>
