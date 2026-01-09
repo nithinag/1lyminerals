@@ -31,8 +31,7 @@ const Products = () => {
         <div className="section-header text-center">
           <span className="section-tag">Our Products</span>
           <h2>Premium Packaged Drinking Water</h2>
-          <p className="section-subtitle">
-            Mineral-enriched water fortified with essential electrolytes for optimal hydration and health
+          <p className="section-subtitle"> Mineral-enriched water fortified with essential electrolytes for optimal hydration and health
           </p>
         </div>
 

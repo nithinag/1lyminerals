@@ -13,7 +13,7 @@ const Footer = () => {
               <div className="footer-logo">
                 <img src="/logo.svg" alt="ILY MINERALS Logo" className="footer-logo-image" />
                 <div className="footer-logo-text-wrapper">
-                <span className="logo-text">ILY</span>
+                <span className="logo-text">1LY</span>
                 <span className="logo-sub">MINERALS</span>
                 </div>
               </div>
@@ -74,7 +74,7 @@ const Footer = () => {
               {/* Left Side - Copyright */}
               <div className="footer-copyright-section">
                 <p className="copyright">
-                  © {currentYear} ILY MINERALS. All rights reserved.
+                  © {currentYear} 1LY MINERALS. All rights reserved.
                 </p>
               </div>
 
