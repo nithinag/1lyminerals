@@ -130,14 +130,13 @@ ${formData.message}
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email Address *</label>
+                <label htmlFor="email">Email Address</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
                   placeholder="your.email@example.com"
                 />
               </div>
