@@ -48,7 +48,7 @@ name: Deploy to Production
 
 on:
   push:
-    branches: [ main, master, theme-change ] # Added theme-change so you can test it
+    branches: [ main, master, theme-change, gh-pages ] # Added theme-change so you can test it
   workflow_dispatch:
 
 jobs:
