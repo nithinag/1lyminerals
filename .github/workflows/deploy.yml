@@ -1,14 +1,61 @@
+# name: Deploy to Production
+
+# on:
+#   push:
+#     branches: [ main, master ]
+#   workflow_dispatch:
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20.x'
+#           cache: 'npm'
+
+#       - name: Install dependencies
+#         run: npm ci
+
+#       - name: Build project
+#         run: npm run build
+#         env:
+#           VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
+#           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
+#           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
+
+#       - name: Deploy to GitHub Pages (optional)
+#         if: false
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_dir: ./dist
+
+#       # Add your deployment steps here
+#       # Examples:
+#       # - Deploy to Vercel
+#       # - Deploy to Netlify
+#       # - Deploy to AWS S3
+#       # - Deploy to your own server
+
 name: Deploy to Production
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, theme-change ] # Added theme-change so you can test it
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    # This ensures it runs if you push to any of your primary branches
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/theme-change'
 
     steps:
       - name: Checkout code
@@ -30,17 +77,10 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
 
-      - name: Deploy to GitHub Pages (optional)
-        if: false
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-
-      # Add your deployment steps here
-      # Examples:
-      # - Deploy to Vercel
-      # - Deploy to Netlify
-      # - Deploy to AWS S3
-      # - Deploy to your own server
-
+          publish_branch: gh-pages
+          cname: 1lyminerals.com  # This keeps your domain linked
