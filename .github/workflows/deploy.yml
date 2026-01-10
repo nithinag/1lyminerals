@@ -81,7 +81,7 @@ jobs:
         run: touch ./dist/.nojekyll
 
       - name: Deploy to GitHub Pages
-        if: false
+        if: true
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
