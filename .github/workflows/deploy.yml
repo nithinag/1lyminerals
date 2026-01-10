@@ -77,6 +77,9 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
 
+      - name: Create .nojekyll file
+        run: touch ./dist/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -84,3 +87,5 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           cname: 1lyminerals.com  # This keeps your domain linked
+          enable_jekyll: false  # Prevents Jekyll from processing files
+          keep_files: false  # Clean the branch before deploying
