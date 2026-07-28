@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ main, master, theme-change ]
+    branches: [ main, master, theme-change, gh-pages ]
 
 jobs:
   build-and-test:

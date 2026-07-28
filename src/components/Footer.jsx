@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div className="container">
+        <div className="footer-container">
           <div className="footer-grid">
             {/* Brand Section */}
             <div className="footer-col">
@@ -78,6 +78,16 @@ const Footer = () => {
                 </p>
               </div>
 
+              {/* Middle - Badges */}
+              <div className="footer-badges">
+                <span className="badge">
+                  <i className="fas fa-certificate"></i> FSSAI Certified
+                </span>
+                <span className="badge">
+                  <i className="fas fa-leaf"></i> Eco-Friendly
+                </span>
+              </div>
+
               {/* Right Side - Connect With Us Section */}
               <div className="footer-social-section">
                 <h4 className="social-heading">Connect With Us</h4>
@@ -94,14 +104,6 @@ const Footer = () => {
                   <a href="https://www.linkedin.com/company/1lyminerals/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-icon">
                     <i className="fab fa-linkedin-in"></i>
                   </a>
-                </div>
-                <div className="footer-badges">
-                  <span className="badge">
-                    <i className="fas fa-certificate"></i> FSSAI Certified
-                  </span>
-                  <span className="badge">
-                    <i className="fas fa-leaf"></i> Eco-Friendly
-                  </span>
                 </div>
               </div>
             </div>
