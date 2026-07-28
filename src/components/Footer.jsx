@@ -1,7 +1,24 @@
+import { useState, useEffect } from 'react';
 import './Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <footer className="footer">
@@ -126,7 +143,7 @@ const Footer = () => {
 
       {/* Back to Top Button */}
       <button 
-        className="back-to-top"
+        className={`back-to-top ${showScrollTop ? 'visible' : ''}`}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         aria-label="Back to top"
       >

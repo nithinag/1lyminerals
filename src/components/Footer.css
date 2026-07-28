@@ -304,8 +304,8 @@
 /* Back to Top Button */
 .back-to-top {
   position: fixed;
-  bottom: 2rem;
-  left: 2rem;
+  bottom: 176px;
+  right: 29px;
   width: 50px;
   height: 50px;
   background: var(--primary-red);
@@ -315,22 +315,25 @@
   font-size: 1.5rem;
   cursor: pointer;
   box-shadow: var(--shadow-lg);
-  transition: var(--transition-normal);
+  transition: all 0.3s ease;
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .back-to-top:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-xl);
-}
-
-@media (max-width: 768px) {
-  .back-to-top {
-    display: none;
-  }
 }
 
 /* Responsive */
