@@ -4,17 +4,24 @@ import './Footer.css';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [scrollRatio, setScrollRatio] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
+      const scrollY = window.scrollY;
+      const innerHeight = window.innerHeight;
+      const scrollHeight = document.documentElement.scrollHeight;
+      
+      setShowScrollTop(scrollY > 300);
+      
+      const totalScrollable = scrollHeight - innerHeight;
+      if (totalScrollable > 0) {
+        setScrollRatio(scrollY / totalScrollable);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -146,6 +153,7 @@ const Footer = () => {
         className={`back-to-top ${showScrollTop ? 'visible' : ''}`}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         aria-label="Back to top"
+        style={{ opacity: showScrollTop ? scrollRatio : 0 }}
       >
         ↑
       </button>

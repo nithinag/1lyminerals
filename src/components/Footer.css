@@ -315,18 +315,16 @@
   font-size: 1.5rem;
   cursor: pointer;
   box-shadow: var(--shadow-lg);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, visibility 0.3s ease;
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
 .back-to-top.visible {
-  opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
@@ -334,6 +332,7 @@
 .back-to-top:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-xl);
+  opacity: 1 !important;
 }
 
 /* Responsive */
