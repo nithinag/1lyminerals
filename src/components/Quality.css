@@ -5,13 +5,13 @@
 .quality-content {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 /* Purification Process */
 .purification-process h3 {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: var(--neutral-dark);
 }
 
@@ -63,6 +63,10 @@
 .step-icon {
   font-size: 3rem;
   margin: 1.5rem 0 1rem;
+  color: var(--primary-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .step-content h4 {
@@ -208,6 +212,9 @@
 .env-icon {
   font-size: 5rem;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .env-content h3 {

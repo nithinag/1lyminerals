@@ -1,8 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import './Contact.css';
 
 const Contact = () => {
+  const [activePlant, setActivePlant] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActivePlant((prev) => (prev === 0 ? 1 : 0));
+    }, 2000);
+    return () => clearInterval(timer);
+  }, []);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -117,9 +125,18 @@ ${formData.message}
                 </svg>
               </div>
               <h4>Plant</h4>
-              <p>Evolve Beverages Co,<br />
-                Shrirangapattna,
-              Mandya - 571 606</p>
+              <div className="plant-address-slider">
+                <div className={`plant-address-slide ${activePlant === 0 ? 'active' : 'exit'}`}>
+                  <p><strong>Plant 1</strong><br />
+                    Evolve Beverages Co,<br />
+                    Shrirangapattna, Mandya - 571 606</p>
+                </div>
+                <div className={`plant-address-slide ${activePlant === 1 ? 'active' : 'exit'}`}>
+                  <p><strong>Plant 2</strong><br />
+                    Awanthi Industries,<br />
+                    Kuduregere, Bangalore - 562162</p>
+                </div>
+              </div>
             </div>
 
             <div className="contact-card" style={{ animationDelay: '0.3s' }}>

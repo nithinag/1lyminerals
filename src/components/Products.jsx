@@ -1,33 +1,88 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Products.css';
 import CustomizedBottlesModal from './CustomizedBottlesModal';
 import QuoteRequestModal from './QuoteRequestModal';
+import { FlameIcon, GiftIcon, StarIcon, SparklesIcon } from './Icons';
+
+const getOfferIcon = (iconName) => {
+  switch (iconName) {
+    case 'flame': return <FlameIcon size={14} />;
+    case 'gift': return <GiftIcon size={14} />;
+    case 'star': return <StarIcon size={14} />;
+    case 'sparkles': return <SparklesIcon size={14} />;
+    default: return null;
+  }
+};
 
 const Products = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState('');
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImageIndex((prev) => (prev === 0 ? 1 : 0));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   const packagingOptions = [
     {
-      size: '200ml',
+      id: '200ml',
+      name: '200ml Premium Bottle',
+      size: '200 ml',
       caseQuantity: '48 Bottles Per Case',
-      icon: '💧',
-      color: '#0066CC',
-      offer: '🔥 Special Offer'
+      image: '/single-bottle.png',
+      description: 'Perfect for events • Easy to carry',
+      rating: 4.9,
+      reviewsCount: 124,
+      offer: { icon: 'flame', text: 'Special Offer' },
+      btnText: 'Request Quote',
+      type: 'standard',
+      sizeClass: 'size-200ml'
     },
     {
-      size: '500ml',
+      id: '500ml',
+      name: '500ml Premium Bottle',
+      size: '500 ml',
       caseQuantity: '24 Bottles Per Case',
-      icon: '💧',
-      color: '#00B4D8',
-      offer: '🎁 Best Seller'
+      image: '/single-bottle.png',
+      description: 'Everyday hydration • Convenient size',
+      rating: 4.8,
+      reviewsCount: 186,
+      offer: { icon: 'gift', text: 'Best Seller' },
+      btnText: 'Request Quote',
+      type: 'standard',
+      sizeClass: 'size-500ml'
     },
     {
-      size: '1 Litre  ',
+      id: '1 Litre',
+      name: '1 Litre Premium Bottle',
+      size: '1000 ml',
       caseQuantity: '15 Bottles Per Case',
-      icon: '💧',
-      color: '#90E0EF',
-      offer: '⭐ Popular'
+      image: '/single-bottle.png',
+      description: 'Optimal hydration • Family size',
+      rating: 4.9,
+      reviewsCount: 95,
+      offer: { icon: 'star', text: 'Popular' },
+      btnText: 'Request Quote',
+      type: 'standard',
+      sizeClass: 'size-1l'
+    },
+    {
+      id: 'customized',
+      name: 'Customized Bottles',
+      size: 'Custom',
+      caseQuantity: 'Events & Corporate Needs',
+      image: '/custom-bottle.png',
+      description: 'Your Brand • Custom labels',
+      rating: 5.0,
+      reviewsCount: 42,
+      offer: { icon: 'sparkles', text: 'Custom Branding' },
+      btnText: 'Design Now',
+      type: 'custom',
+      sizeClass: 'size-custom'
     }
   ];
 
@@ -35,137 +90,69 @@ const Products = () => {
     <section className="products section" id="products">
       <div className="container">
         <div className="section-header text-center">
-          <span className="section-tag">Our Products</span>
-          <h2>Premium Packaged Drinking Water</h2>
-          <p className="section-subtitle"> Mineral-enriched water fortified with essential electrolytes for optimal hydration and health
-          </p>
+          <span className="section-tag">OUR PRODUCTS</span>
+          <p className="section-subtitle">Premium packaged drinking water, delivered fresh and pure</p>
         </div>
 
         <div className="products-content">
-          {/* Main Product Showcase */}
-          <div className="product-showcase">
-            <div className="product-image-wrapper">
-              <div className="product-bottle">
-                <img 
-                  src="/group-bottles-1.png" 
-                  alt="1LY Minerals Bottles" 
-                  className="bottle-image-large"
-                />
-              </div>
-              
-              <div className="product-features">
-                <div className="feature-badge">
-                  <span className="badge-icon">✓</span>
-                  <span>Trusted by Millions</span>
+          {/* Products Grid */}
+          <div className="products-grid">
+            {packagingOptions.map((option) => (
+              <div className="product-card" key={option.id}>
+                <div className="product-image-container">
+                  {option.offer && (
+                    <div className="product-card-offer">
+                      {getOfferIcon(option.offer.icon)}
+                      <span>{option.offer.text}</span>
+                    </div>
+                  )}
+                  <div className="product-card-badge">{option.size}</div>
+                  {option.type === 'standard' ? (
+                    <>
+                      <img
+                        src={`/bottle-${option.id === '1 Litre' ? '1l' : option.id.toLowerCase()}-green.png`}
+                        alt={`${option.name} Green`}
+                        className={`product-card-image ${option.sizeClass} swap-image ${activeImageIndex === 0 ? 'visible' : 'hidden'}`}
+                      />
+                      <img
+                        src={`/bottle-${option.id === '1 Litre' ? '1l' : option.id.toLowerCase()}-red.png`}
+                        alt={`${option.name} Red`}
+                        className={`product-card-image ${option.sizeClass} swap-image ${activeImageIndex === 1 ? 'visible' : 'hidden'}`}
+                      />
+                    </>
+                  ) : (
+                    <img
+                      src={option.image}
+                      alt={option.name}
+                      className={`product-card-image ${option.sizeClass}`}
+                    />
+                  )}
                 </div>
-                <div className="feature-badge">
-                  <span className="badge-icon">✓</span>
-                  <span>FSSAI Approved</span>
-                </div>
-                <div className="feature-badge">
-                  <span className="badge-icon">✓</span>
-                  <span>100% Pure</span>
-                </div>
-              </div>
-            </div>
 
-            <div className="product-details">
-              <h3>Mineral Enriched Water</h3>
-              <p className="product-description">
-                Unlike standard water, <strong>1LY MINERALS</strong> is fortified with essential 
-                electrolytes that support hydration and overall health. Each bottle is carefully 
-                crafted to deliver the perfect balance of minerals your body needs.
-              </p>
+                <div className="product-card-info">
+                  <h3 className="product-card-title">{option.name}</h3>
+                  <p className="product-card-description">{option.description}</p>
 
-              <div className="minerals-list">
-                {packagingOptions.map((option, index) => (
-                  <div key={index} className="mineral-card" style={{'--mineral-color': option.color}}>
-                    <div className="mineral-icon">{option.icon}</div>
-                    <div className="mineral-info">
-                      <div className="mineral-header">
-                        <span className="mineral-name">{option.size}</span>
-                        <span className="card-offer-badge">{option.offer}</span>
-                      </div>
-                      <p className="mineral-benefit">{option.caseQuantity}</p>
-                      <div className="card-cta-buttons">
-                        <button 
-                          className="card-request-btn" 
-                          onClick={() => {
-                            setSelectedProduct(option.size);
-                            setIsQuoteModalOpen(true);
-                          }}
-                        >
-                          Request Quote
-                        </button>
-                      </div>
-                    </div>
+                  <div className="product-case-quantity">
+                    {option.caseQuantity}
                   </div>
-                ))}
-                
-                {/* Customized Card */}
-                <div className="mineral-card customized-card" style={{'--mineral-color': '#FF69B4'}}>
-                  <div className="mineral-icon customized-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M8 2h8l-1 2H9L8 2z"></path>
-                      <path d="M7 4h10v16a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V4z"></path>
-                      <path d="M9 8h6"></path>
-                      <path d="M9 12h4"></path>
-                      <circle cx="12" cy="16" r="1"></circle>
-                      <path d="M16.5 5.5l1.5-1.5 1.5 1.5"></path>
-                      <path d="M18 4v3"></path>
-                      <path d="M19.5 5.5l-1.5 1.5"></path>
-                      <circle cx="18" cy="5.5" r="0.5" fill="currentColor"></circle>
-                      <path d="M16 8l1 1 3-3"></path>
-                      <circle cx="17" cy="9" r="0.5" fill="currentColor"></circle>
-                    </svg>
-                  </div>
-                  <div className="mineral-info">
-                    <div className="mineral-header">
-                      <span className="mineral-name">Customized</span>
-                      <span className="custom-branding-tag">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="12" height="12" style={{display: 'inline-block', marginRight: '4px'}}>
-                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        Custom Branding
-                      </span>
-                    </div>
-                    <p className="mineral-benefit">Events & Corporate Needs</p>
-                    <div className="card-cta-buttons">
-                      <button 
-                        className="card-request-btn" 
-                        onClick={() => setIsModalOpen(true)}
-                      >
-                        Request Quote
-                      </button>
-                    </div>
-                  </div>
+
+                  <button
+                    className="product-card-btn"
+                    onClick={() => {
+                      if (option.type === 'custom') {
+                        setIsModalOpen(true);
+                      } else {
+                        setSelectedProduct(option.id);
+                        setIsQuoteModalOpen(true);
+                      }
+                    }}
+                  >
+                    {option.btnText}
+                  </button>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Product Information Cards */}
-          <div className="product-info-grid">
-            <div className="info-card">
-              <div className="info-icon">💧</div>
-              <h4>Pure & Safe</h4>
-              <p>Multi-stage purification ensures every drop is safe and clean</p>
-            </div>
-            <div className="info-card">
-              <div className="info-icon">⚡</div>
-              <h4>Electrolyte Rich</h4>
-              <p>Essential minerals for optimal hydration and energy</p>
-            </div>
-            <div className="info-card">
-              <div className="info-icon">♻️</div>
-              <h4>Eco-Friendly</h4>
-              <p>Recyclable packaging - crush bottle after use</p>
-            </div>
-            <div className="info-card">
-              <div className="info-icon">🏆</div>
-              <h4>Premium Quality</h4>
-              <p>Industry-leading standards for reliability and trust</p>
-            </div>
+            ))}
           </div>
 
           {/* Call to Action */}
@@ -176,14 +163,14 @@ const Products = () => {
           </div>
         </div>
       </div>
-      
-      <CustomizedBottlesModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+
+      <CustomizedBottlesModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
-      
-      <QuoteRequestModal 
-        isOpen={isQuoteModalOpen} 
+
+      <QuoteRequestModal
+        isOpen={isQuoteModalOpen}
         onClose={() => {
           setIsQuoteModalOpen(false);
           setSelectedProduct('');
@@ -195,6 +182,7 @@ const Products = () => {
 };
 
 export default Products;
+
 
 
 

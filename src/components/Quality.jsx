@@ -1,4 +1,15 @@
 import './Quality.css';
+import { MicroscopeIcon, BulbIcon, WindIcon, LightningIcon, RecycleIcon } from './Icons';
+
+const getQualityStepIcon = (iconName) => {
+  switch (iconName) {
+    case 'microscope': return <MicroscopeIcon size={48} />;
+    case 'bulb': return <BulbIcon size={48} />;
+    case 'wind': return <WindIcon size={48} />;
+    case 'lightning': return <LightningIcon size={48} />;
+    default: return null;
+  }
+};
 
 const Quality = () => {
   const qualitySteps = [
@@ -6,25 +17,25 @@ const Quality = () => {
       step: '01',
       title: 'R.O. Processed',
       description: 'Advanced Reverse Osmosis removes all contaminants and impurities',
-      icon: '🔬'
+      icon: 'microscope'
     },
     {
       step: '02',
       title: 'U.V. Treated',
       description: 'Ultraviolet treatment ensures complete disinfection',
-      icon: '💡'
+      icon: 'bulb'
     },
     {
       step: '03',
       title: 'Ozonised',
       description: 'Ozone treatment for lasting freshness and safety',
-      icon: '💨'
+      icon: 'wind'
     },
     {
       step: '04',
       title: 'Mineral Enriched',
       description: 'Essential minerals added for health benefits',
-      icon: '⚡'
+      icon: 'lightning'
     }
   ];
 
@@ -47,7 +58,7 @@ const Quality = () => {
               {qualitySteps.map((step, index) => (
                 <div key={index} className="process-step">
                   <div className="step-number">{step.step}</div>
-                  <div className="step-icon">{step.icon}</div>
+                  <div className="step-icon">{getQualityStepIcon(step.icon)}</div>
                   <div className="step-content">
                     <h4>{step.title}</h4>
                     <p>{step.description}</p>
@@ -62,7 +73,9 @@ const Quality = () => {
 
           {/* Environmental Message */}
           <div className="environmental-message">
-            <div className="env-icon">♻️</div>
+            <div className="env-icon">
+              <RecycleIcon size={80} />
+            </div>
             <div className="env-content">
               <h3>Crush the Bottle After Use</h3>
               <p>
